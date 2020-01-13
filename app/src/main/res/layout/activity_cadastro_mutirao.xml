@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fundoTela"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroMutiraoActivity">
+
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginBottom="104dp"
+        android:text="Digite a data do mutirão:"
+        app:layout_constraintBottom_toTopOf="@+id/txtTipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btCadastrarMutirao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="223dp"
+        android:onClick="cadastrarMutirao"
+        android:text="Criar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoMutirao" />
+
+    <TextView
+        android:id="@+id/textData"
+        android:layout_width="125dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="40dp"
+        android:text="Selecione a data"
+        app:layout_constraintEnd_toEndOf="@+id/txtTipo"
+        app:layout_constraintStart_toEndOf="@+id/txtTipo"
+        app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    <TextView
+        android:id="@+id/txtTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="27dp"
+        android:text="Selecione o tipo:"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerTipoMutirao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoMutirao"
+        android:layout_width="239dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/btCadastrarMutirao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTipo"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

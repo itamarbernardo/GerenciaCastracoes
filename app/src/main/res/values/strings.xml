@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Gerencia Castrações</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_cadastro_mutirao">CadastroMutiraoActivity</string>
+    <string name="title_activity_listagem_mutiroes">ListagemMutiroes</string>
+
+    <string-array name="tipos_mutirao">
+        <item>-</item>
+        <item>Gato</item>
+        <item>Cachorro</item>
+        <item>Misto</item>
+    </string-array>
+
+</resources>
