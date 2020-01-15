@@ -2,6 +2,7 @@ package com.example.gerenciacastracoes;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -84,7 +85,17 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.tipos_mutirao, android.R.layout.simple_list_item_1);
         tipoMutirao.setAdapter(adapter);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+    }
+
+    public void irTelaListagemMutiroes(View v){
+        Intent telaListagemMutirao = new Intent(getApplicationContext(), ListagemMutiroes.class);
+        startActivity(telaListagemMutirao);
+        finish();
     }
 
     public void cadastrarMutirao(View view) {
@@ -95,6 +106,8 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
                 codigo = fachada.adicionarMutirao(LocalDate.of(ano, mes, dia), tipoMutirao.getSelectedItem().toString());
 
                 emitirAlerta("Mutirão cadastrado com sucesso!" + fachada.buscarMutirao(codigo));
+                //Thread.sleep(4000);
+                //irTelaListagemMutiroes(view);
 
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -109,7 +122,7 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
     public void emitirAlerta(String mensagem) {
         AlertDialog.Builder alerta = new AlertDialog.Builder(CadastroMutiraoActivity.this);
         alerta.setTitle("Aviso");
-        alerta.setCancelable(true); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
+        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
         alerta.setIcon(R.mipmap.ic_interrogacao);
         alerta.setMessage(mensagem);
         alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

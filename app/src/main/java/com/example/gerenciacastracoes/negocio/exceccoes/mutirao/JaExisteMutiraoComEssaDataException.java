@@ -10,10 +10,11 @@ package com.example.gerenciacastracoes.negocio.exceccoes.mutirao;
  *
  * @author Itamar Jr
  */
-public class MutiraoJaExisteException extends Exception {
+public class JaExisteMutiraoComEssaDataException extends Exception{
 
-    public MutiraoJaExisteException() {
-        super("Este Mutirão já existe");
+    public JaExisteMutiraoComEssaDataException() {
+        super("Já existe um mutirão cadastrado com essa data.");
     }
+    
     
 }

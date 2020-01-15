@@ -17,11 +17,13 @@
         <activity
             android:name=".ListagemMutiroes"
             android:label="@string/title_activity_listagem_mutiroes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".CadastroMutiraoActivity"
             android:label="@string/title_activity_cadastro_mutirao"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ListagemMutiroes"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

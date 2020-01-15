@@ -8,6 +8,7 @@ import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
 import com.example.gerenciacastracoes.ui.main.MutiraoAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -32,10 +33,17 @@ public class ListagemMutiroes extends AppCompatActivity {
         ListView listaMutiroes = (ListView) findViewById(R.id.listViewMutiroes);
         ArrayList<Mutirao> mutiroes = (ArrayList<Mutirao>) fachada.listagemMutiroes();
 
+        //Aqui dá pra colocar uma imagem de fundo se não houver mutiroes para mostrar e quando houver
+        //só alterar a visibilidade da imagem
         if(mutiroes != null){
             ArrayAdapter adapter = new MutiraoAdapter(this, mutiroes);
             listaMutiroes.setAdapter(adapter);
         }
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
@@ -43,7 +51,6 @@ public class ListagemMutiroes extends AppCompatActivity {
 
     public void irTelaCadastro(View view) {
         Intent intent1 = new Intent(getApplicationContext(), CadastroMutiraoActivity.class);
-
         startActivity(intent1);
     }
 }

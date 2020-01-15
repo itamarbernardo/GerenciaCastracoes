@@ -28,7 +28,7 @@ public class NegocioMutirao {
 
     public void adicionarMutirao(Mutirao m) throws MutiraoJaExisteException {
 
-        Mutirao mutirao = repositorio.procurarMutirao(m.getData());
+        Mutirao mutirao = repositorio.procurarMutirao(m.getCodigo());
 
             if (mutirao == null) {
 

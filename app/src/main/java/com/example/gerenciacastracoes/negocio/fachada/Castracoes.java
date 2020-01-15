@@ -15,6 +15,7 @@ import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteEstaNaLis
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteJaAdicionadoException;
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteNaoExisteException;
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteNaoPossuiAnimalException;
+import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.JaExisteMutiraoComEssaDataException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoJaExisteException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoNaoExisteException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.TipoDeMutiraoIncompativelComAnimalException;
@@ -45,11 +46,11 @@ public class Castracoes {
         return fachada;
     }
 
-    public int adicionarMutirao(LocalDate data, String tipo) throws MutiraoJaExisteException {
+    public int adicionarMutirao(LocalDate data, String tipo) throws MutiraoJaExisteException, JaExisteMutiraoComEssaDataException {
 
         Mutirao m = negocioMutirao.buscarMutirao(data);
         if (m != null) {
-            throw new MutiraoJaExisteException();
+            throw new JaExisteMutiraoComEssaDataException();
         }
 
         Mutirao mutirao = new Mutirao(data, tipo);
@@ -74,12 +75,17 @@ public class Castracoes {
         negocioMutirao.removerMultirao(data);
     }
 
-    public void alterarMutirao(int codigo, LocalDate data, String tipo) throws MutiraoNaoExisteException {
+    public void alterarMutirao(int codigo, LocalDate data, String tipo) throws MutiraoNaoExisteException, JaExisteMutiraoComEssaDataException {
         Mutirao m = negocioMutirao.buscarMutirao(codigo);
-        if (m != null) {
-            m.setData(data);
-            m.setTipo(tipo);
-            negocioMutirao.alterarMutirao(m);
+        Mutirao mData = negocioMutirao.buscarMutirao(data);
+        if(mData == null) {
+            if (m != null) {
+                m.setData(data);
+                m.setTipo(tipo);
+                negocioMutirao.alterarMutirao(m);
+            }
+        }else{
+            throw new JaExisteMutiraoComEssaDataException();
         }
     }
 
