@@ -27,11 +27,11 @@ public class Mutirao implements Serializable {
     private List<Cliente> listaEspera;
     private String tipo; //Só gato, só cachorro ou misto.
 
-    public Mutirao(LocalDate data, String tipo) {
+    public Mutirao(int codigo, LocalDate data, String tipo) {
         this.data = data;
         this.clientes = new ArrayList<>();
         this.listaEspera = new ArrayList<>();
-        this.codigo = totalMultiroes;
+        this.codigo = codigo;
         totalMultiroes++;
         this.tipo = tipo;
     }

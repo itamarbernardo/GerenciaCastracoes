@@ -27,22 +27,24 @@ public class Cliente implements Serializable{
     private String tipoDePagamento;
     private boolean pagou;
 
-    public Cliente(String nome, String telefone, String tipoDePagamento, boolean pagou) {
+    public Cliente(int codigo, String nome, String telefone, String tipoDePagamento, boolean pagou) {
         this.nome = nome;
         this.telefone = telefone;
         this.pagou = pagou;
         this.tipoDePagamento = tipoDePagamento;
         this.animais = new ArrayList<>();
-        this.codigo = totalClientes;
+        this.codigo = codigo;
         totalClientes++;
     }
 
-    public Cliente(String nome, String telefone, String tipoDePagamento) {
+    public Cliente(int codigo, String nome, String telefone, String tipoDePagamento) {
         this.nome = nome;
         this.telefone = telefone;
+        this.codigo = codigo;
         this.pagou = false;
         this.tipoDePagamento = tipoDePagamento;
         this.animais = new ArrayList<>();
+        totalClientes++;
     }
 
     public void adicionarAnimal(Animal a) throws AnimalJaAdicionadoException {

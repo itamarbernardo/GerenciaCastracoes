@@ -12,14 +12,13 @@
         android:id="@+id/btAdicionarMutirao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/fab_margin"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="16dp"
         android:tint="#FDFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_delete"
+        app:fabSize="mini" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -38,6 +37,14 @@
         android:onClick="irTelaCadastro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_add_round"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="280dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.example.gerenciacastracoes.R;
+import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
 
 import java.time.format.DateTimeFormatter;
@@ -35,16 +34,31 @@ public class MutiraoAdapter extends ArrayAdapter<Mutirao> {
 
         TextView dataMutirao = (TextView) rowView.findViewById(R.id.txtData);
         TextView codigo = (TextView) rowView.findViewById(R.id.txtCodigo);
-        TextView quantidadeClientes = (TextView) rowView.findViewById(R.id.txtQuantidadeClientes);
+        TextView quantidadeAnimais = (TextView) rowView.findViewById(R.id.txtQuantidadeAnimais);
         TextView quantidadeListaEspera = (TextView) rowView.findViewById(R.id.txtQntListaEspera);
         ImageView imagem = (ImageView) rowView.findViewById(R.id.imageView);
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        int contAnimais = 0;
+
+        List<Cliente> clientes = elementos.get(position).getClientes();
+        if(clientes != null && clientes.size() != 0) {
+            for (Cliente c : clientes) {
+                contAnimais = contAnimais + c.getAnimais().size();
+            }
+        }
+        int contListaEspera = 0;
+        List<Cliente> listaEspera = elementos.get(position).getListaEspera();
+        if(listaEspera != null && listaEspera.size() != 0) {
+            for (Cliente c : listaEspera) {
+                contListaEspera = contListaEspera + c.getAnimais().size();
+            }
+        }
         dataMutirao.setText(elementos.get(position).getData().format(formato)); //Tenho que formatar a data para mostrar.
         codigo.setText(elementos.get(position).getCodigo() + "");
-        quantidadeClientes.setText(elementos.get(position).getClientes().size() + "");
-        quantidadeListaEspera.setText(elementos.get(position).getListaEspera().size() + "");
+        quantidadeAnimais.setText(contAnimais + "");
+        quantidadeListaEspera.setText(contListaEspera + "");
 
         String tipo = elementos.get(position).getTipo();
         if(tipo.equals("Gato")) {

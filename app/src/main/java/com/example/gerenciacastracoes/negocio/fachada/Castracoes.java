@@ -24,7 +24,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- *
  * @author Itamar Jr
  */
 public class Castracoes {
@@ -47,13 +46,21 @@ public class Castracoes {
     }
 
     public int adicionarMutirao(LocalDate data, String tipo) throws MutiraoJaExisteException, JaExisteMutiraoComEssaDataException {
+        int codigo;
+        List<Mutirao> lista = negocioMutirao.listagemMutiroes();
+
+        if (lista != null) {
+            codigo = lista.size();
+        } else {
+            codigo = 0;
+        }
 
         Mutirao m = negocioMutirao.buscarMutirao(data);
         if (m != null) {
             throw new JaExisteMutiraoComEssaDataException();
         }
 
-        Mutirao mutirao = new Mutirao(data, tipo);
+        Mutirao mutirao = new Mutirao(codigo, data, tipo);
         negocioMutirao.adicionarMutirao(mutirao);
 
         return mutirao.getCodigo();
@@ -78,13 +85,13 @@ public class Castracoes {
     public void alterarMutirao(int codigo, LocalDate data, String tipo) throws MutiraoNaoExisteException, JaExisteMutiraoComEssaDataException {
         Mutirao m = negocioMutirao.buscarMutirao(codigo);
         Mutirao mData = negocioMutirao.buscarMutirao(data);
-        if(mData == null) {
+        if (mData == null) {
             if (m != null) {
                 m.setData(data);
                 m.setTipo(tipo);
                 negocioMutirao.alterarMutirao(m);
             }
-        }else{
+        } else {
             throw new JaExisteMutiraoComEssaDataException();
         }
     }
@@ -93,42 +100,129 @@ public class Castracoes {
         return negocioMutirao.listagemMutiroes();
     }
 
-    public void adicionarCliente(LocalDate data, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException {
+
+    public void adicionarCliente(LocalDate data, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException, TipoDeMutiraoIncompativelComAnimalException {
+        int codigoCliente;
+        int codigoAnimal;
+        List<Cliente> listaClientes;
+        List<Animal> listaAnimais;
+
         Mutirao mutirao = negocioMutirao.buscarMutirao(data);
         Animal animal;
         Cliente cliente;
         Cliente listaNegra = negocioListaNegra.buscarCliente(telefone);
         if (listaNegra == null) {
             if (mutirao != null) {
-                animal = new Animal(nomeAnimal, tipo, sexo, raca, pelagem);
-                cliente = new Cliente(nome, telefone, tipoDePagamento, pagou);
-                cliente.adicionarAnimal(animal);
+                if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
 
-                mutirao.adicionarCliente(cliente);
+                    listaClientes = mutirao.getClientes();
+                    if (listaClientes != null) {
+                        codigoCliente = listaClientes.size();
+                    } else {
+                        codigoCliente = 0;
+                    }
 
-                negocioMutirao.alterarMutirao(mutirao);
+
+                    cliente = new Cliente(codigoCliente, nome, telefone, tipoDePagamento, pagou);
+                    listaAnimais = cliente.getAnimais();
+                    if (listaAnimais != null) {
+                        codigoAnimal = listaAnimais.size();
+                    } else {
+                        codigoAnimal = 0;
+                    }
+                    animal = new Animal(codigoAnimal, nomeAnimal, tipo, sexo, raca, pelagem);
+
+                    cliente.adicionarAnimal(animal);
+
+                    mutirao.adicionarCliente(cliente);
+
+                    negocioMutirao.alterarMutirao(mutirao);
+                } else {
+                    throw new TipoDeMutiraoIncompativelComAnimalException(mutirao.getTipo());
+                }
             } else {
                 throw new MutiraoNaoExisteException();
             }
-        }else{
+        } else {
             throw new ClienteEstaNaListaNegraException();
         }
     }
 
-    public void adicionarAnimal(LocalDate dataMutirao, String telefone, String nomeAnimal, String tipo, char sexo, String raca, String pelagem) throws AnimalJaAdicionadoException, ClienteNaoExisteException, MutiraoNaoExisteException, TipoDeMutiraoIncompativelComAnimalException {
+
+
+    public void adicionarCliente(int codigoMutirao, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException, TipoDeMutiraoIncompativelComAnimalException {
+        int codigoCliente;
+        int codigoAnimal;
+        List<Cliente> listaClientes;
+        List<Animal> listaAnimais;
+
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        Animal animal;
+        Cliente cliente;
+        Cliente listaNegra = negocioListaNegra.buscarCliente(telefone);
+        if (listaNegra == null) {
+            if (mutirao != null) {
+                if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
+                    listaClientes = mutirao.getClientes();
+                    if (listaClientes != null) {
+                        codigoCliente = listaClientes.size();
+                    } else {
+                        codigoCliente = 0;
+                    }
+
+
+                    cliente = new Cliente(codigoCliente, nome, telefone, tipoDePagamento, pagou);
+                    listaAnimais = cliente.getAnimais();
+                    if (listaAnimais != null) {
+                        codigoAnimal = listaAnimais.size();
+                    } else {
+                        codigoAnimal = 0;
+                    }
+                    animal = new Animal(codigoAnimal, nomeAnimal, tipo, sexo, raca, pelagem);
+
+                    cliente.adicionarAnimal(animal);
+
+                    mutirao.adicionarCliente(cliente);
+
+                    negocioMutirao.alterarMutirao(mutirao);
+                } else {
+                    throw new TipoDeMutiraoIncompativelComAnimalException(mutirao.getTipo());
+                }
+            } else {
+                throw new MutiraoNaoExisteException();
+            }
+        } else {
+            throw new ClienteEstaNaListaNegraException();
+        }
+    }
+
+
+    public void adicionarAnimal(LocalDate dataMutirao, String telefone, String
+            nomeAnimal, String tipo, char sexo, String raca, String pelagem) throws
+            AnimalJaAdicionadoException, ClienteNaoExisteException, MutiraoNaoExisteException, TipoDeMutiraoIncompativelComAnimalException {
+        int codigo;
+        List<Animal> listaAnimais;
+
         Mutirao mutirao = negocioMutirao.buscarMutirao(dataMutirao);
         if (mutirao != null) {
-            if(mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")){
+            if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
                 Cliente c = mutirao.procurarCliente(telefone);
                 if (c != null) {
-                    Animal animal = new Animal(nomeAnimal, tipo, sexo, raca, pelagem);
+                    listaAnimais = c.getAnimais();
+                    if (listaAnimais != null) {
+                        codigo = listaAnimais.size();
+                    } else {
+                        codigo = 0;
+                    }
+
+                    Animal animal = new Animal(codigo, nomeAnimal, tipo, sexo, raca, pelagem);
                     c.adicionarAnimal(animal);
 
                     negocioMutirao.alterarMutirao(mutirao);
                 } else {
                     throw new ClienteNaoExisteException();
                 }
-            }else{
+            } else {
                 throw new TipoDeMutiraoIncompativelComAnimalException(mutirao.getTipo());
             }
 
@@ -137,7 +231,43 @@ public class Castracoes {
         }
     }
 
-    public void adicionarClienteAListaNegra(LocalDate data, String telefone) throws ClienteNaoExisteException, MutiraoNaoExisteException, ClienteJaAdicionadoException {
+    public void adicionarAnimal(int codigoMutirao, String telefone, String nomeAnimal, String
+            tipo, char sexo, String raca, String pelagem) throws
+            AnimalJaAdicionadoException, ClienteNaoExisteException, MutiraoNaoExisteException, TipoDeMutiraoIncompativelComAnimalException {
+        int codigo;
+        List<Animal> listaAnimais;
+
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        if (mutirao != null) {
+            if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
+                Cliente c = mutirao.procurarCliente(telefone);
+                if (c != null) {
+                    listaAnimais = c.getAnimais();
+                    if (listaAnimais != null) {
+                        codigo = listaAnimais.size();
+                    } else {
+                        codigo = 0;
+                    }
+
+                    Animal animal = new Animal(codigo, nomeAnimal, tipo, sexo, raca, pelagem);
+                    c.adicionarAnimal(animal);
+
+                    negocioMutirao.alterarMutirao(mutirao);
+                } else {
+                    throw new ClienteNaoExisteException();
+                }
+            } else {
+                throw new TipoDeMutiraoIncompativelComAnimalException(mutirao.getTipo());
+            }
+
+        } else {
+            throw new MutiraoNaoExisteException();
+        }
+    }
+
+
+    public void adicionarClienteAListaNegra(LocalDate data, String telefone) throws
+            ClienteNaoExisteException, MutiraoNaoExisteException, ClienteJaAdicionadoException {
         Mutirao mutirao = negocioMutirao.buscarMutirao(data);
 
         if (mutirao != null) {
@@ -155,11 +285,20 @@ public class Castracoes {
         }
     }
 
-    public void adicionarClienteAListaNegra(String nome, String telefone, String tipoDePagamento) throws ClienteJaAdicionadoException {
+    public void adicionarClienteAListaNegra(String nome, String telefone, String
+            tipoDePagamento) throws ClienteJaAdicionadoException {
+        int codigoCliente;
+        List<Cliente> listaNegraClientes = negocioListaNegra.listagemClientesListaNegra();
+
         Cliente c = negocioListaNegra.buscarCliente(telefone);
 
         if (c == null) {
-            Cliente cliente = new Cliente(nome, telefone, tipoDePagamento);
+            if (listaNegraClientes != null) {
+                codigoCliente = listaNegraClientes.size();
+            } else {
+                codigoCliente = 0;
+            }
+            Cliente cliente = new Cliente(codigoCliente, nome, telefone, tipoDePagamento);
             negocioListaNegra.adicionarCliente(cliente);
         } else {
             throw new ClienteJaAdicionadoException();

@@ -22,13 +22,13 @@ public class Animal implements Serializable{
     private String raca;
     private String pelagem; //Cor do animal
 
-    public Animal(String nome, String tipo, char sexo, String raca, String pelagem) {
+    public Animal(int codigo, String nome, String tipo, char sexo, String raca, String pelagem) {
         this.nome = nome;
         this.tipo = tipo;
         this.sexo = sexo;
         this.raca = raca;
         this.pelagem = pelagem;
-        this.codigo = totalAnimais;
+        this.codigo = codigo;
         totalAnimais++;
     }
 

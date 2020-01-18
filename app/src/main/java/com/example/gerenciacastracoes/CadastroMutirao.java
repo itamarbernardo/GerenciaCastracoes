@@ -3,13 +3,9 @@ package com.example.gerenciacastracoes;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,19 +15,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gerenciacastracoes.R;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class CadastroMutiraoActivity extends AppCompatActivity {
-    private static final String TAG = "CadastroMutiraoActivity";
+public class CadastroMutirao extends AppCompatActivity {
+    private static final String TAG = "CadastroMutirao";
 
     private Castracoes fachada = Castracoes.getFachada();
     private TextView mDisplayDate;
@@ -57,7 +49,7 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        CadastroMutiraoActivity.this,
+                        CadastroMutirao.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
@@ -105,9 +97,9 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
                 Log.d(TAG, "Cadastrar Mutirao: dd/mm/yyyy: " + dia + "/" + mes + "/" + ano);
                 codigo = fachada.adicionarMutirao(LocalDate.of(ano, mes, dia), tipoMutirao.getSelectedItem().toString());
 
-                emitirAlerta("Mutirão cadastrado com sucesso!" + fachada.buscarMutirao(codigo));
-                //Thread.sleep(4000);
-                //irTelaListagemMutiroes(view);
+                ClasseUtilitaria.emitirAlerta(CadastroMutirao.this, "Mutirão cadastrado com sucesso!" + fachada.buscarMutirao(codigo));
+                Thread.sleep(10000);
+                irTelaListagemMutiroes(view);
 
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -119,20 +111,5 @@ public class CadastroMutiraoActivity extends AppCompatActivity {
         }
     }
 
-    public void emitirAlerta(String mensagem) {
-        AlertDialog.Builder alerta = new AlertDialog.Builder(CadastroMutiraoActivity.this);
-        alerta.setTitle("Aviso");
-        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
-        alerta.setIcon(R.mipmap.ic_interrogacao);
-        alerta.setMessage(mensagem);
-        alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        //Pra colocar outra opção de Cancelar, por ex, só é fazer alerta.setNegativeButton
-        AlertDialog alertDialog = alerta.create();
-        alertDialog.show();
-    }
 }

@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListagemMutiroes extends AppCompatActivity {
 
@@ -31,14 +29,23 @@ public class ListagemMutiroes extends AppCompatActivity {
         setContentView(R.layout.activity_listagem_mutiroes);
 
         ListView listaMutiroes = (ListView) findViewById(R.id.listViewMutiroes);
-        ArrayList<Mutirao> mutiroes = (ArrayList<Mutirao>) fachada.listagemMutiroes();
+        final ArrayList<Mutirao> mutiroes = (ArrayList<Mutirao>) fachada.listagemMutiroes();
 
         //Aqui dá pra colocar uma imagem de fundo se não houver mutiroes para mostrar e quando houver
         //só alterar a visibilidade da imagem
         if(mutiroes != null){
             ArrayAdapter adapter = new MutiraoAdapter(this, mutiroes);
             listaMutiroes.setAdapter(adapter);
+
+            listaMutiroes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //Toast.makeText(getApplicationContext(), "Código: " + mutiroes.get(position).getCodigo(), Toast.LENGTH_SHORT).show();
+                    irTelaVisualizarMutirao(view, mutiroes.get(position).getCodigo());
+                }
+            });
         }
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -48,9 +55,20 @@ public class ListagemMutiroes extends AppCompatActivity {
 
     }
 
+    public void irTelaVisualizarMutirao(View v, int codigo){
+        Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigo);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+        finish();
+    }
 
     public void irTelaCadastro(View view) {
-        Intent intent1 = new Intent(getApplicationContext(), CadastroMutiraoActivity.class);
+        Intent intent1 = new Intent(getApplicationContext(), CadastroMutirao.class);
         startActivity(intent1);
+        finish();
     }
 }

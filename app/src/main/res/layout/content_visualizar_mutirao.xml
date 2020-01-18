@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CadastroMutirao"
-    tools:showIn="@layout/activity_cadastro_mutirao">
+    tools:context=".VisualizarMutirao"
+    tools:showIn="@layout/activity_visualizar_mutirao">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
