@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class Mutirao implements Serializable {
 
-    private static int totalMultiroes;
     private int codigo;
     private LocalDate data;
     private List<Cliente> clientes;
@@ -32,7 +31,6 @@ public class Mutirao implements Serializable {
         this.clientes = new ArrayList<>();
         this.listaEspera = new ArrayList<>();
         this.codigo = codigo;
-        totalMultiroes++;
         this.tipo = tipo;
     }
 
@@ -171,10 +169,6 @@ public class Mutirao implements Serializable {
 
     public void setData(LocalDate data) {
         this.data = data;
-    }
-
-    public static int getTotalMultiroes() {
-        return totalMultiroes;
     }
 
     public int getCodigo() {

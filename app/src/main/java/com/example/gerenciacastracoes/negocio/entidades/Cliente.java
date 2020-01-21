@@ -90,7 +90,11 @@ public class Cliente implements Serializable{
     public int getCodigo() {
         return codigo;
     }
-    
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
     public List<Animal> getAnimais() {
         return animais;
     }

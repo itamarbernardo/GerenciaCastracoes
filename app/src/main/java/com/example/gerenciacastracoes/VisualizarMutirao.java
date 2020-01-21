@@ -1,20 +1,24 @@
 package com.example.gerenciacastracoes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
+import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoNaoExisteException;
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
 import com.example.gerenciacastracoes.ui.main.ExpandableAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +41,7 @@ public class VisualizarMutirao extends AppCompatActivity {
     private TextView codigo;
     private TextView quantidadeAnimais;
     private TextView quantidadeListaEspera;
+    private TextView quantidadeRoupinhas;
     private ImageView imagem;
     private ExpandableListView expandableListView;
 
@@ -65,6 +70,7 @@ public class VisualizarMutirao extends AppCompatActivity {
             quantidadeAnimais = (TextView) findViewById(R.id.txtQuantidadeAnimais);
             quantidadeListaEspera = (TextView) findViewById(R.id.txtQntListaEspera);
             imagem = (ImageView) findViewById(R.id.imageView);
+            quantidadeRoupinhas = (TextView) findViewById(R.id.txtQuantidadeRoupinhas);
 
             preencherDadosCabecalhoMutirao();
 
@@ -87,7 +93,7 @@ public class VisualizarMutirao extends AppCompatActivity {
         parametros.putInt("codigo_mutirao", codigoMutirao);
         intent.putExtras(parametros);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void preencherDadosExpandableListView() {
@@ -100,6 +106,8 @@ public class VisualizarMutirao extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
@@ -114,19 +122,27 @@ public class VisualizarMutirao extends AppCompatActivity {
                 Toast.makeText(VisualizarMutirao.this, "Group (Collapse): " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public void preencherDadosCabecalhoMutirao() {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         int contAnimais = 0;
+        int contRoupinhas = 0;
 
         List<Cliente> clientes = mutirao.getClientes();
         if (clientes != null && clientes.size() != 0) {
             for (Cliente c : clientes) {
                 contAnimais = contAnimais + c.getAnimais().size();
+
+                for(Animal animal : c.getAnimais()){
+                    if(animal.isQuerRoupinha()){
+                        contRoupinhas++;
+                    }
+                }
+
             }
         }
+
         int contListaEspera = 0;
         List<Cliente> listaEspera = mutirao.getListaEspera();
         if (listaEspera != null && listaEspera.size() != 0) {
@@ -134,10 +150,13 @@ public class VisualizarMutirao extends AppCompatActivity {
                 contListaEspera = contListaEspera + c.getAnimais().size();
             }
         }
-        dataMutirao.setText(mutirao.getData().format(formato)); //Tenho que formatar a data para mostrar.
+        String data = ClasseUtilitaria.converterDataParaString(mutirao.getData()); //Tenho que formatar a data para mostrar.
+
+        dataMutirao.setText(data);
         codigo.setText(mutirao.getCodigo() + "");
         quantidadeAnimais.setText(contAnimais + "");
         quantidadeListaEspera.setText(contListaEspera + "");
+        quantidadeRoupinhas.setText(contRoupinhas + "");
 
         String tipo = mutirao.getTipo();
         if (tipo.equals("Gato")) {
@@ -199,6 +218,51 @@ public class VisualizarMutirao extends AppCompatActivity {
          listData.put(listGroup.get(3), auxList);
          **/
 
+    }
+
+    public void irTelaEditarMutirao(View view){
+        Intent intent = new Intent(getApplicationContext(), EditarMutirao.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
+
+    public void removerMutirao(View view){
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Remover...");
+        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
+        alerta.setIcon(R.mipmap.ic_delete);
+        alerta.setMessage("Tem certeza que deseja excluir este mutirão?");
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    fachada.removerMutirao(codigoMutirao);
+                    ClasseUtilitaria.emitirAlerta(VisualizarMutirao.this, "Mutirão excluído com sucesso!");
+                    irTelaListagemMutiroes();
+
+                } catch (MutiraoNaoExisteException e) {
+                    Toast.makeText(VisualizarMutirao.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alerta.show();
+
+    }
+
+    public void irTelaListagemMutiroes(){
+        Intent intent = new Intent(getApplicationContext(), ListagemMutiroes.class);
+        startActivity(intent);
     }
 
 }

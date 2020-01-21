@@ -104,8 +104,8 @@
         android:id="@+id/spinnerTipoAnimal"
         android:layout_width="191dp"
         android:layout_height="34dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
 
@@ -153,6 +153,7 @@
     </RadioGroup>
 
     <RadioGroup
+        android:id="@+id/radioGroup2"
         android:layout_width="101dp"
         android:layout_height="67dp"
         android:layout_marginStart="59dp"
@@ -197,6 +198,37 @@
         android:onClick="cadastrarCliente"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="25dp"
+        android:text="Quer roupinha?"
+        app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <RadioGroup
+        android:layout_width="88dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtPelagem"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+        <RadioButton
+            android:id="@+id/radioBtRoupinhaSim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sim" />
+
+        <RadioButton
+            android:id="@+id/radioBtRoupinhaNao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Não" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

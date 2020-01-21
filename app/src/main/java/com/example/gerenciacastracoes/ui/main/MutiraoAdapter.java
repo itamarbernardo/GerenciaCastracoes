@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gerenciacastracoes.R;
+import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
 
@@ -37,17 +38,28 @@ public class MutiraoAdapter extends ArrayAdapter<Mutirao> {
         TextView quantidadeAnimais = (TextView) rowView.findViewById(R.id.txtQuantidadeAnimais);
         TextView quantidadeListaEspera = (TextView) rowView.findViewById(R.id.txtQntListaEspera);
         ImageView imagem = (ImageView) rowView.findViewById(R.id.imageView);
+        TextView quantidadeRoupinhas = (TextView) rowView.findViewById(R.id.txtQuantidadeRoupinhas);
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         int contAnimais = 0;
+        int contRoupinhas = 0;
 
         List<Cliente> clientes = elementos.get(position).getClientes();
         if(clientes != null && clientes.size() != 0) {
             for (Cliente c : clientes) {
                 contAnimais = contAnimais + c.getAnimais().size();
+
+                for(Animal animal : c.getAnimais()){
+                    if(animal.isQuerRoupinha()){
+                        contRoupinhas++;
+                    }
+                }
+
+
             }
         }
+
         int contListaEspera = 0;
         List<Cliente> listaEspera = elementos.get(position).getListaEspera();
         if(listaEspera != null && listaEspera.size() != 0) {
@@ -55,10 +67,12 @@ public class MutiraoAdapter extends ArrayAdapter<Mutirao> {
                 contListaEspera = contListaEspera + c.getAnimais().size();
             }
         }
+
         dataMutirao.setText(elementos.get(position).getData().format(formato)); //Tenho que formatar a data para mostrar.
         codigo.setText(elementos.get(position).getCodigo() + "");
         quantidadeAnimais.setText(contAnimais + "");
         quantidadeListaEspera.setText(contListaEspera + "");
+        quantidadeRoupinhas.setText(contRoupinhas + "");
 
         String tipo = elementos.get(position).getTipo();
         if(tipo.equals("Gato")) {

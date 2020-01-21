@@ -73,14 +73,23 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
             holder.txtGroupNome = (TextView) convertView.findViewById(R.id.txtGroupNome);
             holder.txtGroupTelefone = (TextView) convertView.findViewById(R.id.txtGroupTelefone);
+            holder.txtGroupQuantidadeRoupinhas = (TextView) convertView.findViewById(R.id.txtQuantidadeRoupinhas);
 
         }
         else{
             holder = (ViewHolderGroup) convertView.getTag();
         }
 
+        int quantRoupinhas = 0;
+        for(Animal animal : listGroupCliente.get(groupPosition).getAnimais()){
+            if(animal.isQuerRoupinha()){
+                quantRoupinhas++;
+            }
+        }
+
         holder.txtGroupNome.setText(listGroupCliente.get(groupPosition).getNome());
         holder.txtGroupTelefone.setText(listGroupCliente.get(groupPosition).getTelefone());
+        holder.txtGroupQuantidadeRoupinhas.setText(quantRoupinhas + "");
 
 
         return convertView;
@@ -102,17 +111,23 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             holder.txtItemSexo = (TextView) convertView.findViewById(R.id.txtItemSexo);
             holder.txtItemRaca = (TextView) convertView.findViewById(R.id.txtItemRaca);
             holder.txtItemPelagem = (TextView) convertView.findViewById(R.id.txtItemPelagem);
+            holder.txtQuerRoupinha = (TextView) convertView.findViewById(R.id.txtQuerRoupinha);
         }
         else{
             holder = (ViewHolderItem) convertView.getTag();
         }
 
+        String querRoupinha = "Não";
+        if(animal.isQuerRoupinha()){
+            querRoupinha = "Sim";
+        }
 
         holder.txtItemNome.setText(animal.getNome());
         holder.txtItemTipo.setText(animal.getTipo());
         holder.txtItemSexo.setText(animal.getSexo() + "");
         holder.txtItemRaca.setText(animal.getRaca());
         holder.txtItemPelagem.setText(animal.getPelagem());
+        holder.txtQuerRoupinha.setText(querRoupinha);
 
         return convertView;
     }
@@ -125,6 +140,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     class ViewHolderGroup{
         TextView txtGroupNome;
         TextView txtGroupTelefone;
+        TextView txtGroupQuantidadeRoupinhas;
 
     }
 
@@ -134,6 +150,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtItemSexo;
         TextView txtItemRaca;
         TextView txtItemPelagem;
+        TextView txtQuerRoupinha;
 
     }
 }

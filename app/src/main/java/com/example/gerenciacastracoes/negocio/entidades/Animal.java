@@ -21,14 +21,16 @@ public class Animal implements Serializable{
     private char sexo;
     private String raca;
     private String pelagem; //Cor do animal
+    private boolean querRoupinha;
 
-    public Animal(int codigo, String nome, String tipo, char sexo, String raca, String pelagem) {
+    public Animal(int codigo, String nome, String tipo, char sexo, String raca, String pelagem, boolean querRoupinha) {
         this.nome = nome;
         this.tipo = tipo;
         this.sexo = sexo;
         this.raca = raca;
         this.pelagem = pelagem;
         this.codigo = codigo;
+        this.querRoupinha = querRoupinha;
         totalAnimais++;
     }
 
@@ -81,7 +83,15 @@ public class Animal implements Serializable{
     public int getCodigo() {
         return codigo;
     }
-    
+
+    public boolean isQuerRoupinha() {
+        return querRoupinha;
+    }
+
+    public void setQuerRoupinha(boolean querRoupinha) {
+        this.querRoupinha = querRoupinha;
+    }
+
     @Override
     public boolean equals(Object obj){
         if(obj instanceof Animal){
@@ -95,8 +105,14 @@ public class Animal implements Serializable{
 
     @Override
     public String toString() {
-        return "Animal{" + "codigo=" + codigo + ", nome=" + nome + ", tipo=" + tipo + ", sexo=" + sexo + ", raca=" + raca + ", pelagem=" + pelagem + '}';
+        return "Animal{" +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", sexo=" + sexo +
+                ", raca='" + raca + '\'' +
+                ", pelagem='" + pelagem + '\'' +
+                ", querRoupinha=" + querRoupinha +
+                '}';
     }
-    
-    
 }

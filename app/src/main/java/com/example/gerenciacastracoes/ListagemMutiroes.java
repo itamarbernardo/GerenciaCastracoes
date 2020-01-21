@@ -63,12 +63,12 @@ public class ListagemMutiroes extends AppCompatActivity {
         intent.putExtras(parametos);
 
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void irTelaCadastro(View view) {
         Intent intent1 = new Intent(getApplicationContext(), CadastroMutirao.class);
         startActivity(intent1);
-        finish();
+        //finish();
     }
 }

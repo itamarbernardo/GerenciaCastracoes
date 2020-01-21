@@ -24,7 +24,11 @@ import java.util.List;
  */
 public class RepositorioListaNegra implements IRepositorioListaNegra {
 
-    private String nomeArquivo = "listaNegra.dat";
+    private String nomeArquivo;
+
+    public RepositorioListaNegra(){
+        this.nomeArquivo = "listaNegra.dat";
+    }
 
     @Override
     public void adicionarCliente(Cliente c) {

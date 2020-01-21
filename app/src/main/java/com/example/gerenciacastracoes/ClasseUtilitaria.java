@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ClasseUtilitaria {
 
     public static void emitirAlerta(Context context, String mensagem) {
@@ -20,7 +23,15 @@ public class ClasseUtilitaria {
             }
         });
         //Pra colocar outra opção de Cancelar, por ex, só é fazer alerta.setNegativeButton
-        AlertDialog alertDialog = alerta.create();
-        alertDialog.show();
+        //AlertDialog alertDialog = alerta.create();
+        //alertDialog.show();
+        alerta.show();
     }
+
+    public static String converterDataParaString(LocalDate data) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return data.format(formato); //Deixa no formato conhecido.
+    }
+
 }

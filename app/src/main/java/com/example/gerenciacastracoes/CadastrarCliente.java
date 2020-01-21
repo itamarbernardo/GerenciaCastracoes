@@ -43,6 +43,9 @@ public class CadastrarCliente extends AppCompatActivity {
     private RadioButton radioBtSexoF;
     private char sexo;
     private EditText edtTxtPelagem;
+    private RadioButton radioBtRoupinhaSim;
+    private RadioButton radioBtRoupinhaNao;
+    private boolean querRoupinha = false;
 
     private static final String TAG = "CadastrarCliente";
 
@@ -78,6 +81,9 @@ public class CadastrarCliente extends AppCompatActivity {
             radioBtSexoM = (RadioButton) findViewById(R.id.radioBtSexoM);
             radioBtSexoF = (RadioButton) findViewById(R.id.radioBtSexoF);
             edtTxtPelagem = (EditText) findViewById(R.id.edtTxtPelagem);
+            radioBtRoupinhaNao = (RadioButton) findViewById(R.id.radioBtRoupinhaNao);
+            radioBtRoupinhaNao.setChecked(true);
+            radioBtRoupinhaSim = (RadioButton) findViewById(R.id.radioBtRoupinhaSim);
 
 
         } else {
@@ -88,7 +94,7 @@ public class CadastrarCliente extends AppCompatActivity {
     public void irTelaVisualizarMutirao(View v){
         Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     public void cadastrarCliente(View view) {
@@ -96,10 +102,10 @@ public class CadastrarCliente extends AppCompatActivity {
             try {
 
                 fachada.adicionarCliente(codigoMutirao, edtTxtNomeCliente.getText().toString(), edtTxtTelefone.getText().toString(), edtTxtTipoPagamento.getText().toString(),
-                        pagou, edtTxtNomeAnimal.getText().toString(), spinnerTipoAnimal.getSelectedItem().toString(), sexo, edtTxtRaca.getText().toString(), edtTxtPelagem.getText().toString());
+                        pagou, edtTxtNomeAnimal.getText().toString(), spinnerTipoAnimal.getSelectedItem().toString(), sexo, edtTxtRaca.getText().toString(), edtTxtPelagem.getText().toString(), querRoupinha);
 
                 ClasseUtilitaria.emitirAlerta(CadastrarCliente.this, "Cliente cadastrado com sucesso!");
-                Thread.sleep(10000);
+                //Thread.sleep(10000);
                 irTelaVisualizarMutirao(view);
 
             } catch (Exception ex) {
@@ -141,6 +147,9 @@ public class CadastrarCliente extends AppCompatActivity {
                     preencherSexoAnimal();
                     if (sexo != 'E') {
                         if (edtTxtPelagem.getText().length() > 0) {
+                            if (radioBtRoupinhaSim.isChecked()) {
+                                querRoupinha = true;
+                            }
                             verificaDadosAnimal = true;
                         } else {
                             Toast.makeText(getApplicationContext(), "Digite a pelagem do animal!", Toast.LENGTH_SHORT).show();

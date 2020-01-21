@@ -27,7 +27,11 @@ import java.util.List;
  */
 public class RepositorioMutirao implements IRepositorioMutirao {
 
-    private String nomeArquivo = "mutiroes.dat";
+    private String nomeArquivo;
+
+    public RepositorioMutirao(){
+        this.nomeArquivo = "mutiroes.dat";
+    }
 
     @Override
     public void adicionarMutirao(Mutirao m) {
