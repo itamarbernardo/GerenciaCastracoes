@@ -16,10 +16,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".VisualizarCliente"
+            android:label="@string/title_activity_visualizar_cliente"
+            android:parentActivityName=".VisualizarMutirao"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".EditarMutirao"
             android:label="@string/title_activity_editar_mutirao"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".VisualizarMutirao"></activity>
+            android:parentActivityName=".VisualizarMutirao"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastrarCliente"
             android:label="@string/title_activity_cadastrar_cliente"

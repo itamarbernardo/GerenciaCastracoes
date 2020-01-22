@@ -37,6 +37,7 @@ public class EditarMutirao extends AppCompatActivity {
     private int dia, mes, ano;
 
     private int codigoMutirao;
+    private LocalDate dataMutirao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class EditarMutirao extends AppCompatActivity {
             Mutirao mutirao = fachada.buscarMutirao(codigoMutirao);
             if(mutirao != null){
                 String data = ClasseUtilitaria.converterDataParaString(mutirao.getData());
+                dataMutirao = mutirao.getData();
                 mDisplayDate.setText(data);
                 tipoMutirao.setSelection(adapter.getPosition(mutirao.getTipo()));
             }
@@ -111,15 +113,18 @@ public class EditarMutirao extends AppCompatActivity {
     public void alterarMutirao(View view){
 
         if (!tipoMutirao.getSelectedItem().toString().equals("-")) {
+            if(mes != 0){
+                dataMutirao = LocalDate.of(ano, mes, dia);
+            }
             try {
-                fachada.alterarMutirao(codigoMutirao, LocalDate.of(ano, mes, dia), tipoMutirao.getSelectedItem().toString());
+                fachada.alterarMutirao(codigoMutirao, dataMutirao, tipoMutirao.getSelectedItem().toString());
 
                 ClasseUtilitaria.emitirAlerta(EditarMutirao.this, "Mutirão editado!");
                 //Thread.sleep(10000);
                 irTelaVisualizarMutirao(view);
 
             } catch (Exception ex) {
-                Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d(TAG, ex.getMessage());
 
             }

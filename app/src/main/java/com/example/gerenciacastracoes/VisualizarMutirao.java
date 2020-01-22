@@ -34,6 +34,10 @@ public class VisualizarMutirao extends AppCompatActivity {
     private Castracoes fachada = Castracoes.getFachada();
     private List<Cliente> listGroup;
     private HashMap<Cliente, List<Animal>> listData;
+
+    private List<Cliente> listGroupEspera;
+    private HashMap<Cliente, List<Animal>> listDataEspera;
+
     private static int codigoMutirao;
     private Mutirao mutirao;
 
@@ -43,7 +47,8 @@ public class VisualizarMutirao extends AppCompatActivity {
     private TextView quantidadeListaEspera;
     private TextView quantidadeRoupinhas;
     private ImageView imagem;
-    private ExpandableListView expandableListView;
+    private ExpandableListView expandableListaClientes;
+    private ExpandableListView expandableListaEspera;
 
 
     @Override
@@ -74,11 +79,13 @@ public class VisualizarMutirao extends AppCompatActivity {
 
             preencherDadosCabecalhoMutirao();
 
-            buildList();
-            expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+            buildListClientes();
+            expandableListaClientes = (ExpandableListView) findViewById(R.id.expandableListaClientes);
+            configurarExpandableListaClientes();
 
-            preencherDadosExpandableListView();
-
+            buildListClientesEspera();
+            expandableListaEspera = (ExpandableListView) findViewById(R.id.expandableListaEspera);
+            configurarExpandableListaEspera();
 
         } else {
             Toast.makeText(VisualizarMutirao.this, "Mutirão não encontrado!", Toast.LENGTH_SHORT).show();
@@ -96,32 +103,74 @@ public class VisualizarMutirao extends AppCompatActivity {
         //finish();
     }
 
-    public void preencherDadosExpandableListView() {
-        expandableListView.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup, listData));
+    public void configurarExpandableListaClientes() {
+        expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup, listData));
 
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        expandableListaClientes.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(VisualizarMutirao.this, "Group: " + groupPosition + "| Item: " + childPosition, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(VisualizarMutirao.this, "Group: " + groupPosition + "| Item: " + childPosition, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(VisualizarMutirao.this, "Cliente:" + listGroup.get(groupPosition).toString(), Toast.LENGTH_SHORT).show();
+                irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
+                //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
                 return false;
             }
         });
 
 
 
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        expandableListaClientes.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
                 Toast.makeText(VisualizarMutirao.this, "Group (Expand): " + groupPosition, Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        expandableListaClientes.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
+
                 Toast.makeText(VisualizarMutirao.this, "Group (Collapse): " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+    }
+
+    public void configurarExpandableListaEspera() {
+        expandableListaEspera.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupEspera, listDataEspera));
+
+        expandableListaEspera.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                //Toast.makeText(VisualizarMutirao.this, "Group: " + groupPosition + "| Item: " + childPosition, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(VisualizarMutirao.this, "Cliente:" + listGroup.get(groupPosition).toString(), Toast.LENGTH_SHORT).show();
+                irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
+                //Verifica se é necessário criar um outro VisualizarClienteListaEspera
+                //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
+                return false;
+            }
+        });
+
+
+
+        expandableListaEspera.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(VisualizarMutirao.this, "Group (Expand): " + groupPosition, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        expandableListaEspera.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+
+                Toast.makeText(VisualizarMutirao.this, "Group (Collapse): " + groupPosition, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -168,16 +217,12 @@ public class VisualizarMutirao extends AppCompatActivity {
         }
     }
 
-    public void buildList() {
-        listGroup = new ArrayList<Cliente>();
+    public void buildListClientes() {
+        //listGroup = new ArrayList<Cliente>();
         listData = new HashMap<Cliente, List<Animal>>();
 
         // GROUP
         listGroup = mutirao.getClientes();
-        //listGroup.add(new Cliente(0, "Everlandsonsclesio", "(87) 98888-8888", "Em espécie"));
-        //listGroup.add(new Cliente(1, "Francisco silva", "(87) 99641-1015", "Caixa"));
-        //listGroup.add(new Cliente(2, "Gislaine Mota", "(87) 9911-1111", "BB"));
-        //listGroup.add(new Cliente(3, "Abruplos Silva", "(87) 9222-2222", "Neon"));
 
         // CHILDREN
         List<Animal> auxList;
@@ -188,35 +233,26 @@ public class VisualizarMutirao extends AppCompatActivity {
             cont++;
         }
 
-        /**
-         List<Animal> auxList = new ArrayList<Animal>();
-         auxList.add(new Animal(0, "Garfild", "Gato", 'M', "SRD", "Amarelo com rosa"));
-         auxList.add(new Animal(1, "Alex o leao", "Gato", 'M', "SRD", "Amarelo queimado"));
-         auxList.add(new Animal(2, "Maious", "Cachorro", 'M',"Poodle", "Preto"));
-         auxList.add(new Animal(3, "Lionel", "Gato", 'M',"SRD", "Cinza com branco"));
-         listData.put(listGroup.get(0), auxList);
 
-         auxList = new ArrayList<Animal>();
-         auxList.add(new Animal(0, "Alicia", "Gato", 'F', "SRD", "Azul com rosa"));
-         auxList.add(new Animal(1, "Maria Gasolina", "Gato", 'F', "SRD", "Amarelo queimado"));
-         auxList.add(new Animal(2, "Mariola", "Cachorro", 'F',"Poodle", "Preto"));
-         auxList.add(new Animal(3, "Lala", "Gato", 'F',"SRD", "Cinza com branco"));
-         listData.put(listGroup.get(1), auxList);
+    }
 
-         auxList = new ArrayList<Animal>();
-         auxList.add(new Animal(0, "Gigi", "Cachorro", 'F', "Shitsu", "Amarelo com rosa"));
-         auxList.add(new Animal(1, "Felicia", "Gato", 'F', "SRD", "Amarelo queimado"));
-         auxList.add(new Animal(2, "Max", "Cachorro", 'M',"Poodle", "Preto"));
-         auxList.add(new Animal(3, "Lili", "Gato", 'F',"SRD", "Cinza com branco"));
-         listData.put(listGroup.get(2), auxList);
+    public void buildListClientesEspera() {
+        //listGroupEspera = new ArrayList<Cliente>();
+        listDataEspera = new HashMap<Cliente, List<Animal>>();
 
-         auxList = new ArrayList<Animal>();
-         auxList.add(new Animal(0, "Gaga", "Gato", 'M', "SRD", "Amarelo com rosa"));
-         auxList.add(new Animal(1, "Liru", "Gato", 'F', "SRD", "Amarelo queimado"));
-         auxList.add(new Animal(2, "Mioso", "Cachorro", 'M',"Poodle", "Preto"));
-         auxList.add(new Animal(3, "Louis", "Gato", 'M',"SRD", "Cinza com branco"));
-         listData.put(listGroup.get(3), auxList);
-         **/
+        // GROUP
+        listGroupEspera = mutirao.getListaEspera();
+
+        // CHILDREN
+        List<Animal> auxList;
+        int cont = 0;
+        for (Cliente cliente : listGroupEspera) {
+            auxList = cliente.getAnimais();
+            listDataEspera.put(listGroupEspera.get(cont), auxList);
+            cont++;
+        }
+
+
 
     }
 
@@ -224,6 +260,17 @@ public class VisualizarMutirao extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EditarMutirao.class);
         Bundle parametos = new Bundle();
         parametos.putInt("codigo_mutirao", codigoMutirao);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
+
+    public void irTelaVisualizarCliente(View view, int codigoCliente){
+        Intent intent = new Intent(getApplicationContext(), VisualizarCliente.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
 
         intent.putExtras(parametos);
 

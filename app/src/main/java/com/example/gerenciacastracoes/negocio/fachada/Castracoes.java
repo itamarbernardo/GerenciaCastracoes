@@ -16,6 +16,7 @@ import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteEstaNaLis
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteJaAdicionadoException;
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteNaoExisteException;
 import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteNaoPossuiAnimalException;
+import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.AlterarTipoMutiraoException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.ErroParaGerarCodigoMutiraoException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.JaExisteMutiraoComEssaDataException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoJaExisteException;
@@ -81,11 +82,18 @@ public class Castracoes {
         negocioMutirao.removerMultirao(data);
     }
 
-    public void alterarMutirao(int codigo, LocalDate data, String tipo) throws MutiraoNaoExisteException, JaExisteMutiraoComEssaDataException {
+    public void alterarMutirao(int codigo, LocalDate data, String tipo) throws MutiraoNaoExisteException, JaExisteMutiraoComEssaDataException, AlterarTipoMutiraoException {
         Mutirao m = negocioMutirao.buscarMutirao(codigo);
         Mutirao mData = negocioMutirao.buscarMutirao(data);
-        if (mData == null) {
+        if (mData == null || mData.getCodigo() == codigo) { //Se o mutirao que tem a mesma data for igual ao código, então é o mesmo!
             if (m != null) {
+                for(Cliente cliente : m.getClientes()){
+                    for(Animal animal : cliente.getAnimais()){
+                        if(!tipo.equals(animal.getTipo())  && !tipo.equals("Misto")){
+                            throw new AlterarTipoMutiraoException(tipo, animal.getTipo());
+                        }
+                    }
+                }
                 m.setData(data);
                 m.setTipo(tipo);
                 negocioMutirao.alterarMutirao(m);

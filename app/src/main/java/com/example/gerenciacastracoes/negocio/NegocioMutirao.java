@@ -40,6 +40,7 @@ public class NegocioMutirao {
          
     }
 
+
     public Mutirao buscarMutirao(LocalDate data) {
         return repositorio.procurarMutirao(data);
 
