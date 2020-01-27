@@ -1,17 +1,20 @@
 package com.example.gerenciacastracoes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
+import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoNaoExisteException;
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
 import com.example.gerenciacastracoes.ui.main.AnimalAdapter;
 import com.example.gerenciacastracoes.ui.main.MutiraoAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -104,5 +107,53 @@ public class VisualizarCliente extends AppCompatActivity {
             });
         }
     }
+
+    public void irTelaEditarCliente(View view){
+        Intent intent = new Intent(getApplicationContext(), EditarCliente.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+
+    }
+
+    public void removerCliente(View view){
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Remover...");
+        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
+        alerta.setIcon(R.mipmap.ic_delete);
+        alerta.setMessage("Tem certeza que deseja excluir este cliente?");
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    fachada.removerCliente(codigoMutirao, codigoCliente);
+                    ClasseUtilitaria.emitirAlerta(VisualizarCliente.this, "Cliente excluído com sucesso!");
+                    irTelaVisualizarMutirao();
+
+                } catch (Exception e) {
+                    Toast.makeText(VisualizarCliente.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alerta.show();
+
+    }
+
+    public void irTelaVisualizarMutirao(){
+        Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
+        startActivity(intent);
+    }
+
 
 }

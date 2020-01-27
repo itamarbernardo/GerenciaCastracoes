@@ -25,5 +25,6 @@
     <string name="title_activity_cadastro_cliente_lista_espera">Cadastro Cliente Lista Espera</string>
     <string name="title_activity_visualizar_cliente_lista_espera">Visualizar Cliente - Lista de Espera
     </string>
+    <string name="title_activity_editar_cliente">Editar Cliente</string>
 
 </resources>

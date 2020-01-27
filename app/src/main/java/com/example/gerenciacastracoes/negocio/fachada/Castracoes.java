@@ -168,7 +168,25 @@ public class Castracoes {
         }
     }
 
+    public void alterarCliente(int codigoMutirao, int codigoCliente, String nome, String telefone, String tipoDePagamento, boolean pagou) throws MutiraoNaoExisteException, ClienteNaoExisteException {
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        if(mutirao != null){
+            Cliente cliente = mutirao.procurarCliente(codigoCliente);
+            if(cliente != null){
+                cliente.setNome(nome);
+                cliente.setTelefone(telefone);
+                cliente.setTipoDePagamento(tipoDePagamento);
+                cliente.setPagou(pagou);
 
+                negocioMutirao.alterarMutirao(mutirao);
+            }else{
+                throw new ClienteNaoExisteException();
+            }
+
+        }else{
+            throw new MutiraoNaoExisteException();
+        }
+    }
 
     public void adicionarCliente(int codigoMutirao, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem, boolean querRoupinha) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException, TipoDeMutiraoIncompativelComAnimalException {
         int codigoCliente;
@@ -228,9 +246,64 @@ public class Castracoes {
         }
     }
 
-    public void transferirCliente(int codigoMutirao, int codigoCliente) throws ClienteNaoExisteException {
+    public void removerCliente(int codigoMutirao, int codigoCliente) throws MutiraoNaoExisteException, ClienteNaoExisteException {
         Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
-        mutirao.transferirCliente(codigoCliente);
+        if(mutirao != null){
+            Cliente cliente = mutirao.procurarCliente(codigoCliente);
+            if(cliente != null){
+                mutirao.removerCliente(cliente);
+                negocioMutirao.alterarMutirao(mutirao);
+            }else{
+                throw new ClienteNaoExisteException();
+            }
+        }else{
+            throw new MutiraoNaoExisteException();
+        }
+    }
+
+    public void transferirCliente(int codigoMutirao, int codigoCliente) throws ClienteNaoExisteException, MutiraoNaoExisteException {
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        if(mutirao != null) {
+            mutirao.transferirCliente(codigoCliente);
+            negocioMutirao.alterarMutirao(mutirao);
+        }else{
+            throw new MutiraoNaoExisteException();
+        }
+    }
+
+    public void removerClienteListaEspera(int codigoMutirao, int codigoCliente) throws MutiraoNaoExisteException, ClienteNaoExisteException {
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        if(mutirao != null){
+            Cliente cliente = mutirao.procurarClienteListaEspera(codigoCliente);
+            if(cliente != null){
+                mutirao.removerClienteListaEspera(cliente);
+                negocioMutirao.alterarMutirao(mutirao);
+            }else{
+                throw new ClienteNaoExisteException();
+            }
+        }else{
+            throw new MutiraoNaoExisteException();
+        }
+    }
+
+    public void alterarClienteListaEspera(int codigoMutirao, int codigoCliente, String nome, String telefone, String tipoDePagamento, boolean pagou) throws MutiraoNaoExisteException, ClienteNaoExisteException {
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        if(mutirao != null){
+            Cliente cliente = mutirao.procurarClienteListaEspera(codigoCliente);
+            if(cliente != null){
+                cliente.setNome(nome);
+                cliente.setTelefone(telefone);
+                cliente.setTipoDePagamento(tipoDePagamento);
+                cliente.setPagou(pagou);
+
+                negocioMutirao.alterarMutirao(mutirao);
+            }else{
+                throw new ClienteNaoExisteException();
+            }
+
+        }else{
+            throw new MutiraoNaoExisteException();
+        }
     }
 
     public void adicionarClienteListaEspera(int codigoMutirao, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem, boolean querRoupinha) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException, TipoDeMutiraoIncompativelComAnimalException {

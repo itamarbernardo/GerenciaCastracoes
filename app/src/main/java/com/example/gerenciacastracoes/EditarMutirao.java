@@ -69,7 +69,7 @@ public class EditarMutirao extends AppCompatActivity {
                 tipoMutirao.setSelection(adapter.getPosition(mutirao.getTipo()));
             }
         }else{
-            Toast.makeText(EditarMutirao.this, "Erro ao passar o código do mutirão!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarMutirao.this, "Erro ao transferir o código do mutirão!", Toast.LENGTH_SHORT).show();
         }
 
     }
