@@ -112,6 +112,8 @@ public class Castracoes {
         int codigoCliente;
         int codigoAnimal;
         List<Cliente> listaClientes;
+        List<Cliente> listaClientesListaEspera;
+
         List<Animal> listaAnimais;
 
         Mutirao mutirao = negocioMutirao.buscarMutirao(data);
@@ -122,9 +124,20 @@ public class Castracoes {
             if (mutirao != null) {
                 if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
 
+                    listaClientesListaEspera = mutirao.getListaEspera();
                     listaClientes = mutirao.getClientes();
-                    if (listaClientes.size() > 0) {
-                        codigoCliente = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+
+                    if (listaClientesListaEspera.size() > 0 && listaClientes.size() > 0) {
+
+                        int codigo1 = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                        int codigo2 = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+
+                        if(codigo1 > codigo2){
+                            codigoCliente = codigo1;
+                        }else{
+                            codigoCliente = codigo2;
+                        }
+
                     } else {
                         codigoCliente = 0;
                     }
@@ -161,6 +174,7 @@ public class Castracoes {
         int codigoCliente;
         int codigoAnimal;
         List<Cliente> listaClientes;
+        List<Cliente> listaClientesListaEspera;
         List<Animal> listaAnimais;
 
         Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
@@ -170,13 +184,24 @@ public class Castracoes {
         if (listaNegra == null) {
             if (mutirao != null) {
                 if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
+
+                    listaClientesListaEspera = mutirao.getListaEspera();
                     listaClientes = mutirao.getClientes();
-                    if (listaClientes.size() > 0) {
-                        codigoCliente = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+
+                    if (listaClientesListaEspera.size() > 0 && listaClientes.size() > 0) {
+
+                        int codigo1 = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                        int codigo2 = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+
+                        if(codigo1 > codigo2){
+                            codigoCliente = codigo1;
+                        }else{
+                            codigoCliente = codigo2;
+                        }
+
                     } else {
                         codigoCliente = 0;
                     }
-
 
                     cliente = new Cliente(codigoCliente, nome, telefone, tipoDePagamento, pagou);
                     listaAnimais = cliente.getAnimais();
@@ -203,6 +228,72 @@ public class Castracoes {
         }
     }
 
+    public void transferirCliente(int codigoMutirao, int codigoCliente) throws ClienteNaoExisteException {
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        mutirao.transferirCliente(codigoCliente);
+    }
+
+    public void adicionarClienteListaEspera(int codigoMutirao, String nome, String telefone, String tipoDePagamento, boolean pagou, String nomeAnimal, String tipo, char sexo, String raca, String pelagem, boolean querRoupinha) throws AnimalJaAdicionadoException, ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException, MutiraoNaoExisteException, ClienteEstaNaListaNegraException, TipoDeMutiraoIncompativelComAnimalException {
+        int codigoCliente;
+        int codigoAnimal;
+
+        List<Cliente> listaClientesListaEspera; //Tenho que pegar as duas listas de espera e ver o ultimo elemento das duas.
+        List<Cliente> listaClientes; //Tenho que pegar as duas listas de espera e ver o ultimo elemento das duas.
+
+        List<Animal> listaAnimais;
+
+        Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
+        Animal animal;
+        Cliente cliente;
+        Cliente listaNegra = negocioListaNegra.buscarCliente(telefone);
+        if (listaNegra == null) {
+            if (mutirao != null) {
+                if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
+                    listaClientesListaEspera = mutirao.getListaEspera();
+                    listaClientes = mutirao.getClientes();
+
+                    if (listaClientesListaEspera.size() > 0 && listaClientes.size() > 0) {
+
+                        int codigo1 = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                        int codigo2 = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+
+                        if(codigo1 > codigo2){
+                            codigoCliente = codigo1;
+                        }else{
+                            codigoCliente = codigo2;
+                        }
+
+                    } else {
+                        codigoCliente = 0;
+                    }
+
+
+                    cliente = new Cliente(codigoCliente, nome, telefone, tipoDePagamento, pagou);
+                    listaAnimais = cliente.getAnimais();
+                    if (listaAnimais.size() > 0) {
+                        codigoAnimal = listaAnimais.get(listaAnimais.size()-1).getCodigo()+1;
+                    } else {
+                        codigoAnimal = 0;
+                    }
+                    animal = new Animal(codigoAnimal, nomeAnimal, tipo, sexo, raca, pelagem, querRoupinha);
+
+                    cliente.adicionarAnimal(animal);
+
+                    mutirao.adicionarClienteListaEspera(cliente);
+
+                    negocioMutirao.alterarMutirao(mutirao);
+
+
+                } else {
+                    throw new TipoDeMutiraoIncompativelComAnimalException(mutirao.getTipo());
+                }
+            } else {
+                throw new MutiraoNaoExisteException();
+            }
+        } else {
+            throw new ClienteEstaNaListaNegraException();
+        }
+    }
 
     public void adicionarAnimal(LocalDate dataMutirao, String telefone, String
             nomeAnimal, String tipo, char sexo, String raca, String pelagem, boolean querRoupinha) throws

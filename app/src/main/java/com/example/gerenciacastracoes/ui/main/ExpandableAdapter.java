@@ -8,6 +8,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.gerenciacastracoes.R;
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
@@ -112,6 +114,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             holder.txtItemRaca = (TextView) convertView.findViewById(R.id.txtItemRaca);
             holder.txtItemPelagem = (TextView) convertView.findViewById(R.id.txtItemPelagem);
             holder.txtQuerRoupinha = (TextView) convertView.findViewById(R.id.txtQuerRoupinha);
+            holder.telaFundo = (ConstraintLayout) convertView.findViewById(R.id.telaFundo);
         }
         else{
             holder = (ViewHolderItem) convertView.getTag();
@@ -120,6 +123,12 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         String querRoupinha = "Não";
         if(animal.isQuerRoupinha()){
             querRoupinha = "Sim";
+        }
+
+        if(animal.getSexo() == 'M'){
+            holder.telaFundo.setBackgroundResource(R.color.colorMacho);
+        }else{
+            holder.telaFundo.setBackgroundResource(R.color.colorFemea);
         }
 
         holder.txtItemNome.setText(animal.getNome());
@@ -151,6 +160,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtItemRaca;
         TextView txtItemPelagem;
         TextView txtQuerRoupinha;
+        ConstraintLayout telaFundo;
 
     }
 }

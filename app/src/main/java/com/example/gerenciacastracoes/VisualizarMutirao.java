@@ -70,26 +70,31 @@ public class VisualizarMutirao extends AppCompatActivity {
         mutirao = fachada.buscarMutirao(codigoMutirao);
         if (mutirao != null) {
 
-            dataMutirao = (TextView) findViewById(R.id.txtData);
-            codigo = (TextView) findViewById(R.id.txtCodigo);
-            quantidadeAnimais = (TextView) findViewById(R.id.txtQuantidadeAnimais);
-            quantidadeListaEspera = (TextView) findViewById(R.id.txtQntListaEspera);
-            imagem = (ImageView) findViewById(R.id.imageView);
-            quantidadeRoupinhas = (TextView) findViewById(R.id.txtQuantidadeRoupinhas);
-
+            inicializaElementos();
             preencherDadosCabecalhoMutirao();
 
             buildListClientes();
-            expandableListaClientes = (ExpandableListView) findViewById(R.id.expandableListaClientes);
             configurarExpandableListaClientes();
 
             buildListClientesEspera();
-            expandableListaEspera = (ExpandableListView) findViewById(R.id.expandableListaEspera);
             configurarExpandableListaEspera();
 
         } else {
             Toast.makeText(VisualizarMutirao.this, "Mutirão não encontrado!", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void inicializaElementos(){
+
+        dataMutirao = (TextView) findViewById(R.id.txtData);
+        codigo = (TextView) findViewById(R.id.txtCodigo);
+        quantidadeAnimais = (TextView) findViewById(R.id.txtQuantidadeAnimais);
+        quantidadeListaEspera = (TextView) findViewById(R.id.txtQntListaEspera);
+        imagem = (ImageView) findViewById(R.id.imageView);
+        quantidadeRoupinhas = (TextView) findViewById(R.id.txtQuantidadeRoupinhas);
+        expandableListaClientes = (ExpandableListView) findViewById(R.id.expandableListaClientes);
+        expandableListaEspera = (ExpandableListView) findViewById(R.id.expandableListaEspera);
 
     }
 
@@ -100,7 +105,15 @@ public class VisualizarMutirao extends AppCompatActivity {
         parametros.putInt("codigo_mutirao", codigoMutirao);
         intent.putExtras(parametros);
         startActivity(intent);
-        //finish();
+    }
+
+    public void irTelaCadastrarClienteListaEspera(View view) {
+        Intent intent = new Intent(getApplicationContext(), CadastroClienteListaEspera.class);
+        Bundle parametros = new Bundle();
+
+        parametros.putInt("codigo_mutirao", codigoMutirao);
+        intent.putExtras(parametros);
+        startActivity(intent);
     }
 
     public void configurarExpandableListaClientes() {
@@ -109,31 +122,12 @@ public class VisualizarMutirao extends AppCompatActivity {
         expandableListaClientes.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                //Toast.makeText(VisualizarMutirao.this, "Group: " + groupPosition + "| Item: " + childPosition, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(VisualizarMutirao.this, "Cliente:" + listGroup.get(groupPosition).toString(), Toast.LENGTH_SHORT).show();
                 irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
                 //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
                 return false;
             }
         });
 
-
-
-        expandableListaClientes.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(VisualizarMutirao.this, "Group (Expand): " + groupPosition, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        expandableListaClientes.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-                Toast.makeText(VisualizarMutirao.this, "Group (Collapse): " + groupPosition, Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
@@ -144,32 +138,12 @@ public class VisualizarMutirao extends AppCompatActivity {
         expandableListaEspera.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                //Toast.makeText(VisualizarMutirao.this, "Group: " + groupPosition + "| Item: " + childPosition, Toast.LENGTH_SHORT).show();
-                //Toast.makeText(VisualizarMutirao.this, "Cliente:" + listGroup.get(groupPosition).toString(), Toast.LENGTH_SHORT).show();
-                irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
-                //Verifica se é necessário criar um outro VisualizarClienteListaEspera
-                //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
+                irTelaVisualizarClienteListaEspera(v, listGroupEspera.get(groupPosition).getCodigo());
+                //Toast.makeText(getApplicationContext(), listGroupEspera.get(groupPosition).toString(), Toast.LENGTH_LONG).show();
                 return false;
             }
         });
 
-
-
-        expandableListaEspera.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(VisualizarMutirao.this, "Group (Expand): " + groupPosition, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        expandableListaEspera.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-                Toast.makeText(VisualizarMutirao.this, "Group (Collapse): " + groupPosition, Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
@@ -276,6 +250,18 @@ public class VisualizarMutirao extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    public void irTelaVisualizarClienteListaEspera(View view, int codigoCliente){
+        Intent intent = new Intent(getApplicationContext(), VisualizarClienteListaEspera.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
+
 
     public void removerMutirao(View view){
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
