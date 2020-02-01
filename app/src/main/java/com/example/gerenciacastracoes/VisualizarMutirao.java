@@ -123,6 +123,7 @@ public class VisualizarMutirao extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
+                //Toast.makeText(getApplicationContext(), listGroup.get(groupPosition).getCodigo()+"", Toast.LENGTH_LONG).show();
                 //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
                 return false;
             }
@@ -139,7 +140,7 @@ public class VisualizarMutirao extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 irTelaVisualizarClienteListaEspera(v, listGroupEspera.get(groupPosition).getCodigo());
-                //Toast.makeText(getApplicationContext(), listGroupEspera.get(groupPosition).toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), listGroupEspera.get(groupPosition).getCodigo()+"", Toast.LENGTH_LONG).show();
                 return false;
             }
         });

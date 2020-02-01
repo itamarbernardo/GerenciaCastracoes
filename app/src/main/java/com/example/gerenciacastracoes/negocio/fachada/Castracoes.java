@@ -138,7 +138,14 @@ public class Castracoes {
                             codigoCliente = codigo2;
                         }
 
-                    } else {
+                    }
+                    else if(listaClientesListaEspera.size() > 0){
+                        codigoCliente = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                    }
+                    else if(listaClientes.size() > 0){
+                        codigoCliente = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+                    }
+                    else {
                         codigoCliente = 0;
                     }
 
@@ -217,7 +224,14 @@ public class Castracoes {
                             codigoCliente = codigo2;
                         }
 
-                    } else {
+                    }
+                    else if(listaClientesListaEspera.size() > 0){
+                        codigoCliente = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                    }
+                    else if(listaClientes.size() > 0){
+                        codigoCliente = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+                    }
+                    else {
                         codigoCliente = 0;
                     }
 
@@ -336,7 +350,14 @@ public class Castracoes {
                             codigoCliente = codigo2;
                         }
 
-                    } else {
+                    }
+                    else if(listaClientesListaEspera.size() > 0){
+                        codigoCliente = listaClientesListaEspera.get(listaClientesListaEspera.size()-1).getCodigo()+1;
+                    }
+                    else if(listaClientes.size() > 0){
+                        codigoCliente = listaClientes.get(listaClientes.size()-1).getCodigo()+1;
+                    }
+                    else {
                         codigoCliente = 0;
                     }
 

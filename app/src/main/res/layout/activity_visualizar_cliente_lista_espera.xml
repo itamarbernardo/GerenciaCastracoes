@@ -107,4 +107,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
 
+    <ImageButton
+        android:id="@+id/imgBtEditarClienteEspera"
+        android:layout_width="51dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="201dp"
+        android:layout_marginTop="12dp"
+        android:onClick="irTelaEditarClienteListaEspera"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageButton
+        android:id="@+id/imgBtRemoverClienteEspera"
+        android:layout_width="51dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="25dp"
+        android:onClick="removerClienteListaEspera"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtEditarClienteEspera"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

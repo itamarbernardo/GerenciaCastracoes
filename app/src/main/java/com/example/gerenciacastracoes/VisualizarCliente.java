@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class VisualizarCliente extends AppCompatActivity {
 
     private Castracoes fachada = Castracoes.getFachada();
-    private int codigoMutirao;
-    private int codigoCliente;
+    private static int codigoMutirao;
+    private static int codigoCliente;
     private ArrayList<Animal> animais;
     private Cliente cliente;
 
@@ -53,14 +53,16 @@ public class VisualizarCliente extends AppCompatActivity {
         if (parametros != null) {
             codigoMutirao = parametros.getInt("codigo_mutirao");
             codigoCliente = parametros.getInt("codigo_cliente");
-
-            cliente = fachada.buscarMutirao(codigoMutirao).procurarCliente(codigoCliente);
-
-            inicializarObjetos();
-            preencherCamposCliente();
-            configurarListView();
-
         }
+            cliente = fachada.buscarMutirao(codigoMutirao).procurarCliente(codigoCliente);
+            if(cliente != null) {
+                inicializarObjetos();
+                preencherCamposCliente();
+                configurarListView();
+            } else {
+                Toast.makeText(getApplicationContext(), "Cliente não encontrado!", Toast.LENGTH_SHORT).show();
+            }
+
 
 
     }
