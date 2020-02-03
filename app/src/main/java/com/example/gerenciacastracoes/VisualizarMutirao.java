@@ -49,6 +49,7 @@ public class VisualizarMutirao extends AppCompatActivity {
     private ImageView imagem;
     private ExpandableListView expandableListaClientes;
     private ExpandableListView expandableListaEspera;
+    private Toolbar toolbar;
 
 
     @Override
@@ -56,9 +57,7 @@ public class VisualizarMutirao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_mutirao);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        inicializaToolbar();
 
         Intent intentRecebeParametos = getIntent();
         Bundle parametros = intentRecebeParametos.getExtras();
@@ -82,6 +81,13 @@ public class VisualizarMutirao extends AppCompatActivity {
         } else {
             Toast.makeText(VisualizarMutirao.this, "Mutirão não encontrado!", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

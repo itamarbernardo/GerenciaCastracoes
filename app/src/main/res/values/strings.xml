@@ -27,5 +27,7 @@
     </string>
     <string name="title_activity_editar_cliente">Editar Cliente</string>
     <string name="title_activity_editar_cliente_lista_espera">Editar Cliente - Lista de Espera</string>
+    <string name="title_activity_cadastrar_animal">Cadastrar Animal</string>
+    <string name="title_activity_visualizar_animal">Visualizar Animal</string>
 
 </resources>

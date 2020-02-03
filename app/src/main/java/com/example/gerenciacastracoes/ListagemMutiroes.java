@@ -22,6 +22,7 @@ public class ListagemMutiroes extends AppCompatActivity {
     private static final String TAG = "ListagemMutiroes";
 
     private Castracoes fachada = Castracoes.getFachada();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,15 @@ public class ListagemMutiroes extends AppCompatActivity {
 
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        inicializaToolbar();
+
+
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 

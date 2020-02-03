@@ -47,6 +47,8 @@ public class VisualizarCliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_cliente);
 
+        inicializaToolbar();
+
         Intent intentRecebeParametos = getIntent();
         Bundle parametros = intentRecebeParametos.getExtras();
 
@@ -54,24 +56,26 @@ public class VisualizarCliente extends AppCompatActivity {
             codigoMutirao = parametros.getInt("codigo_mutirao");
             codigoCliente = parametros.getInt("codigo_cliente");
         }
-            cliente = fachada.buscarMutirao(codigoMutirao).procurarCliente(codigoCliente);
-            if(cliente != null) {
-                inicializarObjetos();
-                preencherCamposCliente();
-                configurarListView();
-            } else {
-                Toast.makeText(getApplicationContext(), "Cliente não encontrado!", Toast.LENGTH_SHORT).show();
-            }
-
+        cliente = fachada.buscarMutirao(codigoMutirao).procurarCliente(codigoCliente);
+        if (cliente != null) {
+            inicializarObjetos();
+            preencherCamposCliente();
+            configurarListView();
+        } else {
+            Toast.makeText(getApplicationContext(), "Cliente não encontrado!", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
 
-    public void inicializarObjetos(){
+
+    public void inicializaToolbar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
+    public void inicializarObjetos() {
         txtNome = findViewById(R.id.txtNome);
         txtTelefone = findViewById(R.id.txtTelefone);
         txtTipoPagamento = findViewById(R.id.txtTipoPagamento);
@@ -80,20 +84,20 @@ public class VisualizarCliente extends AppCompatActivity {
 
     }
 
-    public void preencherCamposCliente(){
+    public void preencherCamposCliente() {
         txtNome.setText(cliente.getNome());
         txtTelefone.setText(cliente.getTelefone());
         txtTipoPagamento.setText(cliente.getTipoDePagamento());
 
-        if(cliente.isPagou()){
+        if (cliente.isPagou()) {
             txtPagou.setText("Sim");
-        }else{
+        } else {
             txtPagou.setText("Não");
         }
 
     }
 
-    public void configurarListView(){
+    public void configurarListView() {
         animais = (ArrayList<Animal>) cliente.getAnimais();
 
         if (animais != null) {
@@ -103,14 +107,25 @@ public class VisualizarCliente extends AppCompatActivity {
             listViewAnimais.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), "Código: " + animais.get(position).toString(), Toast.LENGTH_SHORT).show();
-                    //irTelaVisualizarAnimal(view, mutiroes.get(position).getCodigo());
+                    //Toast.makeText(getApplicationContext(), "Código: " + animais.get(position).toString(), Toast.LENGTH_SHORT).show();
+                    irTelaVisualizarAnimal(animais.get(position).getCodigo());
                 }
             });
         }
     }
 
-    public void irTelaEditarCliente(View view){
+    public void irTelaVisualizarAnimal(int codigoAnimal){
+        Intent intent = new Intent(getApplicationContext(), VisualizarAnimal.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+        parametos.putInt("codigo_animal", codigoAnimal);
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
+
+    public void irTelaEditarCliente(View view) {
         Intent intent = new Intent(getApplicationContext(), EditarCliente.class);
         Bundle parametos = new Bundle();
         parametos.putInt("codigo_mutirao", codigoMutirao);
@@ -122,7 +137,7 @@ public class VisualizarCliente extends AppCompatActivity {
 
     }
 
-    public void removerCliente(View view){
+    public void removerCliente(View view) {
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
         alerta.setTitle("Remover...");
         alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
@@ -152,10 +167,20 @@ public class VisualizarCliente extends AppCompatActivity {
 
     }
 
-    public void irTelaVisualizarMutirao(){
+    public void irTelaVisualizarMutirao() {
         Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
         startActivity(intent);
     }
 
+    public void irTelaCadastrarAnimal(View view) {
+        Intent intent = new Intent(getApplicationContext(), CadastrarAnimal.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
 
 }

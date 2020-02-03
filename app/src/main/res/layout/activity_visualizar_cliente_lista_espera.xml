@@ -109,10 +109,10 @@
 
     <ImageButton
         android:id="@+id/imgBtEditarClienteEspera"
-        android:layout_width="51dp"
-        android:layout_height="49dp"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
         android:layout_marginStart="201dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="2dp"
         android:onClick="irTelaEditarClienteListaEspera"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -120,14 +120,25 @@
 
     <ImageButton
         android:id="@+id/imgBtRemoverClienteEspera"
-        android:layout_width="51dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="7dp"
         android:onClick="removerClienteListaEspera"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toBottomOf="@+id/imgBtEditarClienteEspera"
+        app:layout_constraintStart_toEndOf="@+id/textView27"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtTransferirCliente"
         app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <ImageButton
+        android:id="@+id/imgBtTransferirCliente"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="201dp"
+        android:layout_marginTop="7dp"
+        android:onClick="transferirCliente"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtEditarClienteEspera"
+        app:srcCompat="@drawable/ic_swap_foreground" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

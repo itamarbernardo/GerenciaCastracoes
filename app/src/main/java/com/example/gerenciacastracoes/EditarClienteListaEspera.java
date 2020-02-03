@@ -22,6 +22,7 @@ public class EditarClienteListaEspera extends AppCompatActivity {
     private int codigoMutirao;
     private int codigoCliente;
     private Castracoes fachada = Castracoes.getFachada();
+    private Toolbar toolbar;
 
     //Cliente
     private EditText edtTxtNomeCliente;
@@ -36,10 +37,7 @@ public class EditarClienteListaEspera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_cliente_lista_espera);
 
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        inicializaToolbar();
 
         Intent intent = getIntent();
         Bundle parametros = intent.getExtras();
@@ -54,6 +52,13 @@ public class EditarClienteListaEspera extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Erro ao transferir os dados!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void inicializarElementos() {

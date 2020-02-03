@@ -423,7 +423,7 @@ public class Castracoes {
         }
     }
 
-    public void adicionarAnimal(int codigoMutirao, String telefone, String nomeAnimal, String
+    public void adicionarAnimal(int codigoMutirao, int codigoCliente, String nomeAnimal, String
             tipo, char sexo, String raca, String pelagem, boolean querRoupinha) throws
             AnimalJaAdicionadoException, ClienteNaoExisteException, MutiraoNaoExisteException, TipoDeMutiraoIncompativelComAnimalException {
         int codigo;
@@ -432,7 +432,7 @@ public class Castracoes {
         Mutirao mutirao = negocioMutirao.buscarMutirao(codigoMutirao);
         if (mutirao != null) {
             if (mutirao.getTipo().equals(tipo) || mutirao.getTipo().equals("Misto")) {
-                Cliente c = mutirao.procurarCliente(telefone);
+                Cliente c = mutirao.procurarCliente(codigoCliente);
                 if (c != null) {
                     listaAnimais = c.getAnimais();
                     if (listaAnimais.size() > 0) {

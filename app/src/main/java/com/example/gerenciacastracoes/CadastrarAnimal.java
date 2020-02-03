@@ -3,7 +3,6 @@ package com.example.gerenciacastracoes;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,30 +13,18 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.time.LocalDate;
+public class CadastrarAnimal extends AppCompatActivity {
 
-public class CadastrarCliente extends AppCompatActivity {
-
-    private int codigoMutirao;
     private Castracoes fachada = Castracoes.getFachada();
+    private int codigoMutirao;
+    private int codigoCliente;
 
     private Toolbar toolbar;
-
-    //Cliente
-    private EditText edtTxtNomeCliente;
-    private EditText edtTxtTelefone;
-    private EditText edtTxtTipoPagamento;
-    private RadioButton radioBtPagouSim;
-    private RadioButton radioBtPagouNao;
-    private boolean pagou = false;
-
-    //Animal
     private EditText edtTxtNomeAnimal;
     private EditText edtTxtRaca;
     private Spinner spinnerTipoAnimal;
@@ -49,42 +36,45 @@ public class CadastrarCliente extends AppCompatActivity {
     private RadioButton radioBtRoupinhaNao;
     private boolean querRoupinha = false;
 
-    private static final String TAG = "CadastrarCliente";
+    private static final String TAG = "CadastrarAnimal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_cliente);
+        setContentView(R.layout.activity_cadastrar_animal);
 
         inicializaToolbar();
 
-        Intent intent = getIntent();
-        Bundle parametros = intent.getExtras();
+        Intent intentRecebeParametos = getIntent();
+        Bundle parametros = intentRecebeParametos.getExtras();
+
         if (parametros != null) {
             codigoMutirao = parametros.getInt("codigo_mutirao");
+            codigoCliente = parametros.getInt("codigo_cliente");
 
             inicializaObjetos();
 
-
         } else {
-            Toast.makeText(CadastrarCliente.this, "Erro ao passar o código do mutirão!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Erro ao transferir os dados!", Toast.LENGTH_SHORT).show();
         }
+
     }
 
-    public void inicializaObjetos(){
-        edtTxtNomeCliente = (EditText) findViewById(R.id.edtTxtNomeCliente);
-        edtTxtTelefone = (EditText) findViewById(R.id.edtTextTelefone);
-        edtTxtTipoPagamento = (EditText) findViewById(R.id.edtTextTipoPagamento);
-        radioBtPagouNao = (RadioButton) findViewById(R.id.radioBtPagouNao);
-        radioBtPagouNao.setChecked(true);
-        radioBtPagouSim = (RadioButton) findViewById(R.id.radioBtPagouSim);
+    public void inicializaToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
 
+    public void inicializaObjetos() {
         edtTxtNomeAnimal = (EditText) findViewById(R.id.edtTextNomeAnimal);
         edtTxtRaca = (EditText) findViewById(R.id.edtTxtRaca);
+
         spinnerTipoAnimal = (Spinner) findViewById(R.id.spinnerTipoAnimal);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.tipos_animais, android.R.layout.simple_list_item_1);
         spinnerTipoAnimal.setAdapter(adapter);
+
         radioBtSexoM = (RadioButton) findViewById(R.id.radioBtSexoM);
         radioBtSexoF = (RadioButton) findViewById(R.id.radioBtSexoF);
         edtTxtPelagem = (EditText) findViewById(R.id.edtTxtPelagem);
@@ -94,28 +84,13 @@ public class CadastrarCliente extends AppCompatActivity {
 
     }
 
-    public void inicializaToolbar() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void irTelaVisualizarMutirao(View v){
-        Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
-        startActivity(intent);
-        //finish();
-    }
-
-    public void cadastrarCliente(View view) {
-        if (fazerVerificacoesCliente() && fazerVerificacoesDadosAnimal()) {
+    public void cadastrarAnimal(View view) {
+        if (fazerVerificacoesDadosAnimal()) {
             try {
 
-                fachada.adicionarCliente(codigoMutirao, edtTxtNomeCliente.getText().toString(), edtTxtTelefone.getText().toString(), edtTxtTipoPagamento.getText().toString(),
-                        pagou, edtTxtNomeAnimal.getText().toString(), spinnerTipoAnimal.getSelectedItem().toString(), sexo, edtTxtRaca.getText().toString(), edtTxtPelagem.getText().toString(), querRoupinha);
-
-                ClasseUtilitaria.emitirAlerta(CadastrarCliente.this, "Cliente cadastrado com sucesso!");
-                //Thread.sleep(10000);
-                irTelaVisualizarMutirao(view);
+                fachada.adicionarAnimal(codigoMutirao, codigoCliente, edtTxtNomeAnimal.getText().toString(), spinnerTipoAnimal.getSelectedItem().toString(), sexo, edtTxtRaca.getText().toString(), edtTxtPelagem.getText().toString(), querRoupinha);
+                ClasseUtilitaria.emitirAlerta(CadastrarAnimal.this, "Animal cadastrado com sucesso!");
+                irTelaVisualizarCliente();
 
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -123,28 +98,7 @@ public class CadastrarCliente extends AppCompatActivity {
 
             }
         }
-    }
 
-    public boolean fazerVerificacoesCliente() {
-        boolean verificaDadosCliente = false;
-
-        if (edtTxtNomeCliente.getText().length() > 0) {
-            if (edtTxtTelefone.getText().length() > 0) {
-                if (edtTxtTipoPagamento.getText().length() > 0) {
-                    if (radioBtPagouSim.isChecked()) {
-                        pagou = true;
-                    }
-                    verificaDadosCliente = true;
-                } else {
-                    Toast.makeText(getApplicationContext(), "Digite o tipo de pagamento!", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "Digite o telefone do cliente!", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Digite o nome do cliente!", Toast.LENGTH_SHORT).show();
-        }
-        return verificaDadosCliente;
     }
 
     public boolean fazerVerificacoesDadosAnimal() {
@@ -187,6 +141,17 @@ public class CadastrarCliente extends AppCompatActivity {
         } else {
             sexo = 'E';
         }
+    }
+
+    public void irTelaVisualizarCliente() {
+        Intent intent = new Intent(getApplicationContext(), VisualizarCliente.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
     }
 
 

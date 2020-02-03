@@ -19,6 +19,7 @@ import java.util.Calendar;
 public class CadastroMutirao extends AppCompatActivity {
     private static final String TAG = "CadastroMutirao";
 
+    private Toolbar toolbar;
     private Castracoes fachada = Castracoes.getFachada();
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -71,10 +72,15 @@ public class CadastroMutirao extends AppCompatActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.tipos_mutirao, android.R.layout.simple_list_item_1);
         tipoMutirao.setAdapter(adapter);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        inicializaToolbar();
+
+
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 

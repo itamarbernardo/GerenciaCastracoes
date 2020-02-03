@@ -16,15 +16,25 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".VisualizarAnimal"
+            android:label="@string/title_activity_visualizar_animal"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".VisualizarCliente"></activity>
+        <activity
+            android:name=".CadastrarAnimal"
+            android:label="@string/title_activity_cadastrar_animal"
+            android:parentActivityName=".VisualizarCliente"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".EditarClienteListaEspera"
             android:label="@string/title_activity_editar_cliente_lista_espera"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".VisualizarClienteListaEspera"></activity>
+            android:parentActivityName=".VisualizarClienteListaEspera"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarCliente"
             android:label="@string/title_activity_editar_cliente"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".VisualizarCliente"/>
+            android:parentActivityName=".VisualizarCliente"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarClienteListaEspera"
             android:label="@string/title_activity_visualizar_cliente_lista_espera"

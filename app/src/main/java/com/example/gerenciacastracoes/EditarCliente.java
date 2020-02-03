@@ -22,6 +22,7 @@ public class EditarCliente extends AppCompatActivity {
     private int codigoMutirao;
     private int codigoCliente;
     private Castracoes fachada = Castracoes.getFachada();
+    private Toolbar toolbar;
 
     //Cliente
     private EditText edtTxtNomeCliente;
@@ -37,9 +38,7 @@ public class EditarCliente extends AppCompatActivity {
         setContentView(R.layout.activity_editar_cliente);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        inicializaToolbar();
 
         Intent intent = getIntent();
         Bundle parametros = intent.getExtras();
@@ -55,6 +54,13 @@ public class EditarCliente extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(), "Erro ao transferir os dados!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void inicializarElementos(){

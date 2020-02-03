@@ -28,6 +28,7 @@ public class EditarMutirao extends AppCompatActivity {
     private static final String TAG = "EditarMutirao";
 
     private Castracoes fachada = Castracoes.getFachada();
+    private Toolbar toolbar;
 
     private TextView mDisplayDate;
     private Spinner tipoMutirao;
@@ -43,6 +44,8 @@ public class EditarMutirao extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_mutirao);
+
+        inicializaToolbar();
 
         Intent intentRecebeParametos = getIntent();
         Bundle parametros = intentRecebeParametos.getExtras();
@@ -71,6 +74,13 @@ public class EditarMutirao extends AppCompatActivity {
         }else{
             Toast.makeText(EditarMutirao.this, "Erro ao transferir o código do mutirão!", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

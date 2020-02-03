@@ -44,6 +44,8 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_cliente_lista_espera);
 
+        inicializaToolbar();
+
         Intent intentRecebeParametos = getIntent();
         Bundle parametros = intentRecebeParametos.getExtras();
 
@@ -65,15 +67,18 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
     }
 
     public void inicializarObjetos() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         txtNome = findViewById(R.id.txtNome);
         txtTelefone = findViewById(R.id.txtTelefone);
         txtTipoPagamento = findViewById(R.id.txtTipoPagamento);
         txtPagou = findViewById(R.id.txtPagou);
         listViewAnimais = findViewById(R.id.listViewAnimais);
+
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -154,6 +159,35 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
         startActivity(intent);
 
 
+    }
+
+    public void transferirCliente(View view){
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Transferir...");
+        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
+        alerta.setIcon(R.mipmap.ic_swap);
+        alerta.setMessage("Tem certeza que deseja transferir este cliente?");
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    fachada.transferirCliente(codigoMutirao, codigoCliente);
+                    ClasseUtilitaria.emitirAlerta(VisualizarClienteListaEspera.this, "Cliente transferido com sucesso!");
+                    irTelaVisualizarMutirao();
+
+                } catch (Exception e) {
+                    Toast.makeText(VisualizarClienteListaEspera.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alerta.show();
     }
 
 

@@ -23,6 +23,8 @@ public class CadastroClienteListaEspera extends AppCompatActivity {
     private int codigoMutirao;
     private Castracoes fachada = Castracoes.getFachada();
 
+    private Toolbar toolbar;
+
     //Cliente
     private EditText edtTxtNomeCliente;
     private EditText edtTxtTelefone;
@@ -50,9 +52,7 @@ public class CadastroClienteListaEspera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cliente_lista_espera);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        inicializaToolbar();
 
         Intent intent = getIntent();
         Bundle parametros = intent.getExtras();
@@ -64,6 +64,13 @@ public class CadastroClienteListaEspera extends AppCompatActivity {
         } else {
             Toast.makeText(CadastroClienteListaEspera.this, "Erro ao passar o código do mutirão!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void inicializaToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void inicializarElementos(){

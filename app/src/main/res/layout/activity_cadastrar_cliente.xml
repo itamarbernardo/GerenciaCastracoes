@@ -174,31 +174,6 @@
             android:text="F" />
     </RadioGroup>
 
-    <EditText
-        android:id="@+id/edtTxtPelagem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="165dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite a pelagem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
-
-    <Button
-        android:id="@+id/btCadastrarCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="20dp"
-        android:text="Cadastar"
-        android:onClick="cadastrarCliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
-
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
@@ -208,6 +183,20 @@
         android:text="Quer roupinha?"
         app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <EditText
+        android:id="@+id/edtTxtPelagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="165dp"
+        android:ems="10"
+        android:hint="Digite a pelagem"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
 
     <RadioGroup
         android:layout_width="88dp"
@@ -229,6 +218,17 @@
             android:layout_height="wrap_content"
             android:text="Não" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/btCadastrarCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="20dp"
+        android:onClick="cadastrarCliente"
+        android:text="Cadastar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
