@@ -74,9 +74,11 @@ public class Cliente implements Serializable{
         }
     }
 
-    public void removerAnimal(Animal a) throws AnimalNaoExisteException {
-        if (animais.indexOf(a) != -1) {
-            animais.remove(a);
+    public void removerAnimal(int codigo) throws AnimalNaoExisteException {
+        Animal animal = procurarAnimal(codigo);
+
+        if (animal != null) {
+            animais.remove(animal);
         }
         else{
             throw new AnimalNaoExisteException();

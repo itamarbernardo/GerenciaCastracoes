@@ -53,10 +53,6 @@ public class EditarMutirao extends AppCompatActivity {
         if (parametros != null) {
             codigoMutirao = parametros.getInt("codigo_mutirao");
 
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
             mDisplayDate = (TextView) findViewById(R.id.textData);
             configurarParametrosData();
 

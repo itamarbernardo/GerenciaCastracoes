@@ -96,9 +96,11 @@ public class Mutirao implements Serializable {
         }
     }
 
-    public void removerCliente(Cliente c) throws ClienteNaoExisteException {
-        if (clientes.indexOf(c) != -1) {
-            clientes.remove(c);
+    public void removerCliente(int codigoCliente) throws ClienteNaoExisteException {
+        Cliente cliente = procurarCliente(codigoCliente);
+
+        if (cliente != null) {
+            clientes.remove(cliente);
         } else {
             throw new ClienteNaoExisteException();
         }
@@ -147,9 +149,10 @@ public class Mutirao implements Serializable {
         return c;
     }
 
-    public void removerClienteListaEspera(Cliente c) throws ClienteNaoExisteException {
-        if (listaEspera.indexOf(c) != -1) {
-            listaEspera.remove(c);
+    public void removerClienteListaEspera(int codigoCliente) throws ClienteNaoExisteException {
+        Cliente clienteListaEspera = procurarClienteListaEspera(codigoCliente);
+        if (clienteListaEspera != null) {
+            listaEspera.remove(clienteListaEspera);
         } else {
             throw new ClienteNaoExisteException();
         }

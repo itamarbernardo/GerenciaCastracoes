@@ -29,5 +29,13 @@
     <string name="title_activity_editar_cliente_lista_espera">Editar Cliente - Lista de Espera</string>
     <string name="title_activity_cadastrar_animal">Cadastrar Animal</string>
     <string name="title_activity_visualizar_animal">Visualizar Animal</string>
+    <string name="title_activity_editar_animal">Editar Animal</string>
+    <string name="title_activity_visualizar_animal_lista_espera">Visualizar Animal - Lista de
+        Espera
+    </string>
+    <string name="title_activity_editar_animal_lista_espera">Editar Animal - Lista de Espera
+    </string>
+    <string name="title_activity_cadastrar_animal_lista_espera">Cadastrar Animal - Lista de Espera
+    </string>
 
 </resources>

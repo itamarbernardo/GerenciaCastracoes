@@ -105,13 +105,23 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
             listViewAnimais.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), "Código: " + animais.get(position).toString(), Toast.LENGTH_SHORT).show();
-                    //irTelaVisualizarAnimal(view, mutiroes.get(position).getCodigo());
+                    //Toast.makeText(getApplicationContext(), "Código: " + animais.get(position).toString(), Toast.LENGTH_SHORT).show();
+                    irTelaVisualizarAnimal(animais.get(position).getCodigo());
                 }
             });
         }
     }
 
+    public void irTelaVisualizarAnimal(int codigoAnimal){
+        Intent intent = new Intent(getApplicationContext(), VisualizarAnimalListaEspera.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+        parametos.putInt("codigo_animal", codigoAnimal);
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
 
     public void removerClienteListaEspera(View view) {
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
@@ -190,5 +200,15 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
         alerta.show();
     }
 
+    public void irTelaCadastrarAnimalListaEspera(View view){
+        Intent intent = new Intent(getApplicationContext(), CadastrarAnimalListaEspera.class);
+        Bundle parametos = new Bundle();
+        parametos.putInt("codigo_mutirao", codigoMutirao);
+        parametos.putInt("codigo_cliente", codigoCliente);
+
+        intent.putExtras(parametos);
+
+        startActivity(intent);
+    }
 
 }
