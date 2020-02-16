@@ -24,8 +24,8 @@
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="174dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="29dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="68dp"
         android:onClick="irTelaListagemListaNegra"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
@@ -34,14 +34,14 @@
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="174dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="17dp"
+        android:layout_width="206dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="68dp"
         android:onClick="irTelaListagemMutiroes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mutiroes_foto_copia" />
+        app:srcCompat="@drawable/mutiroes_azul_claro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class Cliente implements Serializable{
 
-    private static int totalClientes;
     private int codigo;
     private String nome;
     private String telefone;
@@ -34,7 +33,7 @@ public class Cliente implements Serializable{
         this.tipoDePagamento = tipoDePagamento;
         this.animais = new ArrayList<>();
         this.codigo = codigo;
-        totalClientes++;
+
     }
 
     public Cliente(int codigo, String nome, String telefone, String tipoDePagamento) {
@@ -44,7 +43,7 @@ public class Cliente implements Serializable{
         this.pagou = false;
         this.tipoDePagamento = tipoDePagamento;
         this.animais = new ArrayList<>();
-        totalClientes++;
+
     }
 
     public void adicionarAnimal(Animal a) throws AnimalJaAdicionadoException {
@@ -85,9 +84,6 @@ public class Cliente implements Serializable{
         }
     }
 
-    public static int getTotalClientes() {
-        return totalClientes;
-    }
 
     public int getCodigo() {
         return codigo;

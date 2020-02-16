@@ -16,16 +16,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".EditarListaNegra"
+            android:label="@string/title_activity_editar_lista_negra"
+            android:parentActivityName=".VisualizarListaNegra"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".VisualizarListaNegra"
             android:label="@string/title_activity_visualizar_lista_negra"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".ListagemListaNegra"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastroListaNegra"
             android:label="@string/title_activity_cadastro_lista_negra"
+            android:parentActivityName=".ListagemListaNegra"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ListagemListaNegra"
             android:label="@string/title_activity_listagem_lista_negra"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastrarAnimalListaEspera"

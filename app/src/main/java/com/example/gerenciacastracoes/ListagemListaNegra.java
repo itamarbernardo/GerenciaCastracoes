@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class ListagemListaNegra extends AppCompatActivity {
             listaNegraClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //Toast.makeText(getApplicationContext(), "Código: " + mutiroes.get(position).getCodigo(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Código: " + clientes.get(position).getCodigo(), Toast.LENGTH_SHORT).show();
                     irTelaVisualizarClienteListaNegra(view, clientes.get(position).getCodigo());
                 }
             });

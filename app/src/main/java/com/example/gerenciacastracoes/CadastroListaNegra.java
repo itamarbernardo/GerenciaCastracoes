@@ -63,7 +63,7 @@ public class CadastroListaNegra extends AppCompatActivity {
             if (fazerVerificacoesCliente()) {
                 try {
 
-                    fachada.adicionarClienteAListaNegra(edtTxtNomeCliente.getText().toString(), edtTxtTelefone.getText().toString(), "BB");
+                    fachada.adicionarClienteAListaNegra(edtTxtNomeCliente.getText().toString(), edtTxtTelefone.getText().toString(), "Vazio");
 
                     ClasseUtilitaria.emitirAlerta(CadastroListaNegra.this, "Cliente inserido na Lista Negra com sucesso!");
                     //Thread.sleep(10000);

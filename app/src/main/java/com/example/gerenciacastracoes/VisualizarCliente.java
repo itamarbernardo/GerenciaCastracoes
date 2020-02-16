@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 import com.example.gerenciacastracoes.negocio.entidades.Mutirao;
+import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteJaAdicionadoException;
+import com.example.gerenciacastracoes.negocio.exceccoes.Cliente.ClienteNaoExisteException;
 import com.example.gerenciacastracoes.negocio.exceccoes.mutirao.MutiraoNaoExisteException;
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
 import com.example.gerenciacastracoes.ui.main.AnimalAdapter;
@@ -149,6 +151,37 @@ public class VisualizarCliente extends AppCompatActivity {
                 try {
                     fachada.removerCliente(codigoMutirao, codigoCliente);
                     ClasseUtilitaria.emitirAlerta(VisualizarCliente.this, "Cliente excluído com sucesso!");
+                    irTelaVisualizarMutirao();
+
+                } catch (Exception e) {
+                    Toast.makeText(VisualizarCliente.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alerta.show();
+
+    }
+
+    public void transferirListaNegra(View view){
+
+        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+        alerta.setTitle("Lista Negra...");
+        alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
+        alerta.setIcon(R.mipmap.ic_interrogacao);
+        alerta.setMessage("Tem certeza que deseja excluir este cliente e inseri-lo na LISTA NEGRA?");
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    fachada.adicionarClienteAListaNegra(codigoMutirao, codigoCliente);
+                    ClasseUtilitaria.emitirAlerta(VisualizarCliente.this, "Cliente adicionado a LISTA NEGRA com sucesso!");
                     irTelaVisualizarMutirao();
 
                 } catch (Exception e) {
