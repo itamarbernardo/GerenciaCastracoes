@@ -37,5 +37,8 @@
     </string>
     <string name="title_activity_cadastrar_animal_lista_espera">Cadastrar Animal - Lista de Espera
     </string>
+    <string name="title_activity_listagem_lista_negra">Listagem - Lista Negra</string>
+    <string name="title_activity_cadastro_lista_negra">Cadastro - Lista Negra</string>
+    <string name="title_activity_visualizar_lista_negra">Visualizar - Lista Negra</string>
 
 </resources>

@@ -16,9 +16,21 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
         <activity
+            android:name=".VisualizarListaNegra"
+            android:label="@string/title_activity_visualizar_lista_negra"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CadastroListaNegra"
+            android:label="@string/title_activity_cadastro_lista_negra"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListagemListaNegra"
+            android:label="@string/title_activity_listagem_lista_negra"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".CadastrarAnimalListaEspera"
             android:label="@string/title_activity_cadastrar_animal_lista_espera"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarAnimalListaEspera"
             android:label="@string/title_activity_editar_animal_lista_espera"

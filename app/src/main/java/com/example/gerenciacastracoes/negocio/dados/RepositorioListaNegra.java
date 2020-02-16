@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,7 @@ public class RepositorioListaNegra implements IRepositorioListaNegra {
             clientes = (List<Cliente>) is.readObject();
             is.close();
         } catch (FileNotFoundException ex) {
+            clientes = new ArrayList<>();
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

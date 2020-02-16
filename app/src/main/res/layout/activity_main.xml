@@ -20,24 +20,28 @@
         app:srcCompat="@android:drawable/ic_delete"
         app:fabSize="mini" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
 
-    <Button
-        android:id="@+id/btIrTelaCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="174dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="29dp"
         android:layout_marginTop="68dp"
-        android:text="Mutiroes"
-        android:onClick="irTelaCadastro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:onClick="irTelaListagemListaNegra"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lista_negra_editado" />
 
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="174dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="68dp"
+        android:onClick="irTelaListagemMutiroes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mutiroes_foto_copia" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

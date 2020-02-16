@@ -83,12 +83,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void irTelaCadastro(View view){
+    public void irTelaListagemMutiroes(View view){
         //Intent intent1 = new Intent(getApplicationContext(), CadastroMutiraoActivity.class);
         Intent intent1 = new Intent(getApplicationContext(), ListagemMutiroes.class);
 
         startActivity(intent1);
     }
 
+    public void irTelaListagemListaNegra(View view){
+        Intent intent1 = new Intent(getApplicationContext(), ListagemListaNegra.class);
+
+        startActivity(intent1);
+    }
 
 }
