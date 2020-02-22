@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 
@@ -14,18 +15,25 @@ import com.example.gerenciacastracoes.R;
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
 import com.example.gerenciacastracoes.negocio.entidades.Cliente;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ExpandableAdapter extends BaseExpandableListAdapter {
     private List<Cliente> listGroupCliente;
     private HashMap<Cliente, List<Animal>> listData;
+
+    private List<Cliente> listGroupPesquisa;
+    private HashMap<Cliente, List<Animal>> listDataPesquisa;
+
     private LayoutInflater inflater;
 
     public ExpandableAdapter(Context context, List<Cliente> listGroup, HashMap<Cliente, List<Animal>> listData) {
         this.listGroupCliente = listGroup;
         this.listData = listData;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.listGroupPesquisa = listGroup;
+        this.listDataPesquisa = listData;
     }
 
     @Override
@@ -144,6 +152,51 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence filtro) {
+                FilterResults results = new FilterResults();
+                //se não foi realizado nenhum filtro insere todos os itens.
+                if (filtro == null || filtro.length() == 0) {
+                    results.count = listGroupCliente.size();
+                    results.values = listGroupCliente;
+                } else {
+                    //cria um array para armazenar os objetos filtrados.
+                    List<Cliente> itens_filtrados = new ArrayList<Cliente>();
+
+                    //percorre toda lista verificando se contem a palavra do filtro na descricao do objeto.
+                    for (int i = 0; i < listGroupCliente.size(); i++) {
+                        Cliente data = listGroupCliente.get(i);
+
+                        filtro = filtro.toString().toLowerCase();
+                        String condicao = data.getNome().toLowerCase() +  data.getTelefone().replaceAll("[^0-9]", "");
+
+                        if (condicao.contains(filtro)) {
+                            //se conter adiciona na lista de itens filtrados.
+                            //Se chegar aqui, é porque o cliente pertence. Então tem que pegar os animais dele!
+                            itens_filtrados.add(data);
+                        }
+                    }
+                    // Define o resultado do filtro na variavel FilterResults
+                    results.count = itens_filtrados.size();
+                    results.values = itens_filtrados;
+                }
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
+                listGroupPesquisa = (List<Cliente>) results.values; // Valores filtrados.
+                notifyDataSetChanged();  // Notifica a lista de alteração
+            }
+
+        };
+        return filter;
     }
 
     class ViewHolderGroup{

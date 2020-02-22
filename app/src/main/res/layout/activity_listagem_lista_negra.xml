@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ListagemListaNegra">
 
+    <ImageButton
+        android:id="@+id/imgBtPesquisar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="19dp"
+        android:backgroundTint="#ffffff"
+        android:onClick="aparecerCampoPesquisa"
+        android:tint="#6A5ACD"
+        app:layout_constraintStart_toEndOf="@+id/txtTitulo"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@android:drawable/ic_search_category_default" />
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
@@ -17,7 +30,7 @@
         android:layout_height="606dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34">
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo">
 
     </ListView>
 
@@ -36,7 +49,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
@@ -44,6 +57,18 @@
         android:text="Lista Negra de Clientes"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/edtTxtPesquisa"
+        android:layout_width="178dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="Pesquisar..."
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/imgBtPesquisar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
