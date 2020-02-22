@@ -19,6 +19,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,6 +32,27 @@ public class RepositorioMutirao implements IRepositorioMutirao {
 
     public RepositorioMutirao(){
         this.nomeArquivo = "mutiroes.dat";
+    }
+
+    private void organizarMutiroes(List<Mutirao> mutiroes){
+        int cont = 0;
+
+        for(Mutirao m : mutiroes){
+            if(m.getData().isBefore(LocalDate.now())){
+                cont++;
+            }else{
+                break;
+            }
+        }
+
+        for(int i = 0; i < cont; i++){
+            Mutirao m = mutiroes.get(0);
+            mutiroes.remove(m);
+            mutiroes.add(m);
+
+        }
+
+
     }
 
     @Override
@@ -58,6 +80,8 @@ public class RepositorioMutirao implements IRepositorioMutirao {
         }
 
         mutiroes.add(m);
+        Collections.sort(mutiroes); //Insere e ordena
+        organizarMutiroes(mutiroes);
 
         //Escrita
         try {
@@ -208,6 +232,8 @@ public class RepositorioMutirao implements IRepositorioMutirao {
 
         int index = mutiroes.indexOf(m);
         mutiroes.set(index, m);
+        Collections.sort(mutiroes); //Após editar, ordena. Pode ter alterado a data.
+        organizarMutiroes(mutiroes);
 
         //Escrita
         try {

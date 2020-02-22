@@ -2,6 +2,9 @@ package com.example.gerenciacastracoes;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.gerenciacastracoes.negocio.entidades.Animal;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VisualizarCliente extends AppCompatActivity {
 
@@ -63,6 +67,7 @@ public class VisualizarCliente extends AppCompatActivity {
             inicializarObjetos();
             preencherCamposCliente();
             configurarListView();
+            configurarTxtTelefone();
         } else {
             Toast.makeText(getApplicationContext(), "Cliente não encontrado!", Toast.LENGTH_SHORT).show();
         }
@@ -70,6 +75,23 @@ public class VisualizarCliente extends AppCompatActivity {
 
     }
 
+    public void configurarTxtTelefone(){
+        txtTelefone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("tel:" + txtTelefone.getText().toString());
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+
+                PackageManager packageManager = getPackageManager();
+                List<ResolveInfo> listaAppsParaTelefone = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                if(listaAppsParaTelefone.size() > 0) {
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "O aplicativo requerido não está disponível.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
     public void inicializaToolbar() {
         toolbar = findViewById(R.id.toolbar);
@@ -175,7 +197,7 @@ public class VisualizarCliente extends AppCompatActivity {
         alerta.setTitle("Lista Negra...");
         alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
         alerta.setIcon(R.mipmap.ic_interrogacao);
-        alerta.setMessage("Tem certeza que deseja excluir este cliente e inseri-lo na LISTA NEGRA?");
+        alerta.setMessage("Tem certeza que deseja excluir este cliente e inserí-lo na LISTA NEGRA?");
         alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

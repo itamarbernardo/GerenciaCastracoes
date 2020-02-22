@@ -42,7 +42,6 @@ public class VisualizarMutirao extends AppCompatActivity {
     private Mutirao mutirao;
 
     private TextView dataMutirao;
-    private TextView codigo;
     private TextView quantidadeAnimais;
     private TextView quantidadeListaEspera;
     private TextView quantidadeRoupinhas;
@@ -94,7 +93,6 @@ public class VisualizarMutirao extends AppCompatActivity {
     public void inicializaElementos(){
 
         dataMutirao = (TextView) findViewById(R.id.txtData);
-        codigo = (TextView) findViewById(R.id.txtCodigo);
         quantidadeAnimais = (TextView) findViewById(R.id.txtQuantidadeAnimais);
         quantidadeListaEspera = (TextView) findViewById(R.id.txtQntListaEspera);
         imagem = (ImageView) findViewById(R.id.imageView);
@@ -183,7 +181,6 @@ public class VisualizarMutirao extends AppCompatActivity {
         String data = ClasseUtilitaria.converterDataParaString(mutirao.getData()); //Tenho que formatar a data para mostrar.
 
         dataMutirao.setText(data);
-        codigo.setText(mutirao.getCodigo() + "");
         quantidadeAnimais.setText(contAnimais + "");
         quantidadeListaEspera.setText(contListaEspera + "");
         quantidadeRoupinhas.setText(contRoupinhas + "");

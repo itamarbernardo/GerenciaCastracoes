@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Itamar Jr
  */
-public class Mutirao implements Serializable {
+public class Mutirao implements Serializable, Comparable {
 
     private int codigo;
     private LocalDate data;
@@ -205,5 +205,21 @@ public class Mutirao implements Serializable {
                 ", listaEspera=" + listaEspera +
                 ", tipo='" + tipo + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object objectj) {
+        if (objectj instanceof Mutirao && objectj != null) {
+            Mutirao mutirao = (Mutirao) objectj;
+
+            if (this.data.isBefore(mutirao.getData())) {
+                return -1;
+            } else if (this.data.isAfter(mutirao.getData())) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        return 0;
     }
 }

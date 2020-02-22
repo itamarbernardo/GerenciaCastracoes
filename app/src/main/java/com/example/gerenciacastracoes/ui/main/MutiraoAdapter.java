@@ -34,7 +34,6 @@ public class MutiraoAdapter extends ArrayAdapter<Mutirao> {
         View rowView = inflater.inflate(R.layout.linha, parent, false);
 
         TextView dataMutirao = (TextView) rowView.findViewById(R.id.txtData);
-        TextView codigo = (TextView) rowView.findViewById(R.id.txtCodigo);
         TextView quantidadeAnimais = (TextView) rowView.findViewById(R.id.txtQuantidadeAnimais);
         TextView quantidadeListaEspera = (TextView) rowView.findViewById(R.id.txtQntListaEspera);
         ImageView imagem = (ImageView) rowView.findViewById(R.id.imageView);
@@ -69,7 +68,6 @@ public class MutiraoAdapter extends ArrayAdapter<Mutirao> {
         }
 
         dataMutirao.setText(elementos.get(position).getData().format(formato)); //Tenho que formatar a data para mostrar.
-        codigo.setText(elementos.get(position).getCodigo() + "");
         quantidadeAnimais.setText(contAnimais + "");
         quantidadeListaEspera.setText(contListaEspera + "");
         quantidadeRoupinhas.setText(contRoupinhas + "");

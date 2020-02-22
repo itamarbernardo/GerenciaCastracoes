@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.gerenciacastracoes.negocio.fachada.Castracoes;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -73,9 +75,16 @@ public class CadastroClienteListaEspera extends AppCompatActivity {
 
     }
 
+    public void criarMascaraTelefone(){
+        SimpleMaskFormatter simpleMaskFormatter = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        MaskTextWatcher maskTextWatcher = new MaskTextWatcher(edtTxtTelefone, simpleMaskFormatter);
+        edtTxtTelefone.addTextChangedListener(maskTextWatcher);
+    }
+
     private void inicializarElementos(){
         edtTxtNomeCliente = (EditText) findViewById(R.id.edtTxtNomeCliente);
         edtTxtTelefone = (EditText) findViewById(R.id.edtTextTelefone);
+        criarMascaraTelefone();
         edtTxtTipoPagamento = (EditText) findViewById(R.id.edtTextTipoPagamento);
         radioBtPagouNao = (RadioButton) findViewById(R.id.radioBtPagouNao);
         radioBtPagouNao.setChecked(true);
