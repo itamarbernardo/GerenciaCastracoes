@@ -19,8 +19,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,12 @@ public class VisualizarMutirao extends AppCompatActivity {
     private List<Cliente> listGroupEspera;
     private HashMap<Cliente, List<Animal>> listDataEspera;
 
+    private List<Cliente> listGroupNaoPagaram;
+    private HashMap<Cliente, List<Animal>> listDataClientesNaoPagaram;
+
+    private List<Cliente> listGroupPagaram;
+    private HashMap<Cliente, List<Animal>> listDataClientesPagaram;
+
     private static int codigoMutirao;
     private Mutirao mutirao;
 
@@ -49,7 +57,9 @@ public class VisualizarMutirao extends AppCompatActivity {
     private ExpandableListView expandableListaClientes;
     private ExpandableListView expandableListaEspera;
     private Toolbar toolbar;
-
+    private Spinner spinnerSelecaoClientes;
+    private ArrayAdapter adapter;
+    private int codigoSelecaoCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +81,8 @@ public class VisualizarMutirao extends AppCompatActivity {
             inicializaElementos();
             preencherDadosCabecalhoMutirao();
 
-            buildListClientes();
+            //buildListClientes();
+            buildListSelecaoClientes();
             configurarExpandableListaClientes();
 
             buildListClientesEspera();
@@ -100,6 +111,10 @@ public class VisualizarMutirao extends AppCompatActivity {
         expandableListaClientes = (ExpandableListView) findViewById(R.id.expandableListaClientes);
         expandableListaEspera = (ExpandableListView) findViewById(R.id.expandableListaEspera);
 
+        spinnerSelecaoClientes = (Spinner) findViewById(R.id.spinnerSelecaoClientes);
+        adapter = ArrayAdapter.createFromResource(this, R.array.selecao_clientes, android.R.layout.simple_list_item_1);
+        spinnerSelecaoClientes.setAdapter(adapter);
+
     }
 
     public void irTelaCadastrarCliente(View view) {
@@ -121,21 +136,53 @@ public class VisualizarMutirao extends AppCompatActivity {
     }
 
     public void configurarExpandableListaClientes() {
-        expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup, listData));
+
+        spinnerSelecaoClientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinnerSelecaoClientes.getSelectedItem().toString().equals("Pagaram")) {
+                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupPagaram, listDataClientesPagaram));
+                    codigoSelecaoCliente = 1;
+                } else if (spinnerSelecaoClientes.getSelectedItem().toString().equals("Não Pagaram")){
+                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupNaoPagaram, listDataClientesNaoPagaram));
+                    codigoSelecaoCliente = 2;
+                }else {
+                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup, listData));
+                    codigoSelecaoCliente = 0;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         expandableListaClientes.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
-                //Toast.makeText(getApplicationContext(), listGroup.get(groupPosition).getCodigo()+"", Toast.LENGTH_LONG).show();
-                //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
-                return false;
+                if(codigoSelecaoCliente == 1) {
+                    irTelaVisualizarCliente(v, listGroupPagaram.get(groupPosition).getCodigo());
+                    //Toast.makeText(getApplicationContext(), listGroup.get(groupPosition).getCodigo()+"", Toast.LENGTH_LONG).show();
+                    //Quando clicar no animal, aí vai para o Visualizar Cliente com o ListView de animais.
+                }
+                else if(codigoSelecaoCliente == 2){
+                    irTelaVisualizarCliente(v, listGroupNaoPagaram.get(groupPosition).getCodigo());
+                }
+                else{
+                    irTelaVisualizarCliente(v, listGroup.get(groupPosition).getCodigo());
+                }
+                    return false;
             }
         });
 
 
 
     }
+
+
 
     public void configurarExpandableListaEspera() {
         expandableListaEspera.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupEspera, listDataEspera));
@@ -193,17 +240,32 @@ public class VisualizarMutirao extends AppCompatActivity {
         } else {
             imagem.setImageResource(R.drawable.misto);
         }
+
+
     }
 
-    public void buildListClientes() {
-        //listGroup = new ArrayList<Cliente>();
+    public void buildListSelecaoClientes() {
         listData = new HashMap<Cliente, List<Animal>>();
+        listDataClientesNaoPagaram = new HashMap<Cliente, List<Animal>>();
+        listDataClientesPagaram = new HashMap<Cliente, List<Animal>>();
 
         // GROUP
-        listGroup = mutirao.getClientes();
+        listGroup = mutirao.getClientes(); //Pega todos os clientes
+        listGroupNaoPagaram = new ArrayList<>();
+        listGroupPagaram = new ArrayList<>();
+
+        for(Cliente cliente : mutirao.getClientes()){
+            if(cliente.isPagou()){
+                listGroupPagaram.add(cliente);
+            }else{
+                listGroupNaoPagaram.add(cliente);
+            }
+        }
+
 
         // CHILDREN
         List<Animal> auxList;
+        //Insere todos os clientes
         int cont = 0;
         for (Cliente cliente : listGroup) {
             auxList = cliente.getAnimais();
@@ -211,6 +273,21 @@ public class VisualizarMutirao extends AppCompatActivity {
             cont++;
         }
 
+        //Insere os clientes que pagaram
+        cont = 0;
+        for (Cliente cliente : listGroupPagaram) {
+            auxList = cliente.getAnimais();
+            listDataClientesPagaram.put(listGroupPagaram.get(cont), auxList);
+            cont++;
+        }
+
+        //Insere os clientes que não pagaram
+        cont = 0;
+        for (Cliente cliente : listGroupNaoPagaram) {
+            auxList = cliente.getAnimais();
+            listDataClientesNaoPagaram.put(listGroupNaoPagaram.get(cont), auxList);
+            cont++;
+        }
 
     }
 

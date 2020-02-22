@@ -198,5 +198,15 @@
         app:layout_constraintTop_toBottomOf="@+id/LinearLayout1"
         app:srcCompat="@android:drawable/ic_input_add" />
 
+    <Spinner
+        android:id="@+id/spinnerSelecaoClientes"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_more_vert_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtRemoverMutirao" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
