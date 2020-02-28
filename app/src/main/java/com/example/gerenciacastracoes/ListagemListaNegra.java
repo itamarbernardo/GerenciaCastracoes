@@ -108,6 +108,7 @@ public class ListagemListaNegra extends AppCompatActivity {
             verificaCliqueBotao = true;
         }else{
             edtTxtPesquisa.setVisibility(View.INVISIBLE);
+            edtTxtPesquisa.setText("");
             txtTitulo.setVisibility(View.VISIBLE);
             verificaCliqueBotao = false;
         }

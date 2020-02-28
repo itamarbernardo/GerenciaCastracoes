@@ -51,6 +51,7 @@ public class CadastrarCliente extends AppCompatActivity {
     private RadioButton radioBtRoupinhaNao;
     private boolean querRoupinha = false;
 
+
     private static final String TAG = "CadastrarCliente";
 
     @Override
@@ -73,13 +74,25 @@ public class CadastrarCliente extends AppCompatActivity {
         }
     }
 
-    public void criarMascaraTelefone(){
+
+    public void impedirRoupinhaEmAnimalMacho() {
+        radioBtSexoM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioBtRoupinhaNao.setChecked(true);
+
+            }
+        });
+
+    }
+
+    public void criarMascaraTelefone() {
         SimpleMaskFormatter simpleMaskFormatter = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
         MaskTextWatcher maskTextWatcher = new MaskTextWatcher(edtTxtTelefone, simpleMaskFormatter);
         edtTxtTelefone.addTextChangedListener(maskTextWatcher);
     }
 
-    public void inicializaObjetos(){
+    public void inicializaObjetos() {
         edtTxtNomeCliente = (EditText) findViewById(R.id.edtTxtNomeCliente);
         edtTxtTelefone = (EditText) findViewById(R.id.edtTextTelefone);
         criarMascaraTelefone();
@@ -100,6 +113,7 @@ public class CadastrarCliente extends AppCompatActivity {
         radioBtRoupinhaNao = (RadioButton) findViewById(R.id.radioBtRoupinhaNao);
         radioBtRoupinhaNao.setChecked(true);
         radioBtRoupinhaSim = (RadioButton) findViewById(R.id.radioBtRoupinhaSim);
+        //impedirRoupinhaEmAnimalMacho();
 
     }
 
@@ -109,7 +123,7 @@ public class CadastrarCliente extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void irTelaVisualizarMutirao(View v){
+    public void irTelaVisualizarMutirao(View v) {
         Intent intent = new Intent(getApplicationContext(), VisualizarMutirao.class);
         startActivity(intent);
         //finish();

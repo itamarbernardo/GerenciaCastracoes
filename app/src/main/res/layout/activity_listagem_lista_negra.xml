@@ -8,16 +8,15 @@
 
     <ImageButton
         android:id="@+id/imgBtPesquisar"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="19dp"
-        android:backgroundTint="#ffffff"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#fafafa"
         android:onClick="aparecerCampoPesquisa"
-        android:tint="#6A5ACD"
         app:layout_constraintStart_toEndOf="@+id/txtTitulo"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:srcCompat="@drawable/ic_search_black_20dp" />
 
     <include
         android:id="@+id/toolbar"

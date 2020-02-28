@@ -17,9 +17,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -35,16 +39,16 @@ public class VisualizarMutirao extends AppCompatActivity {
 
     private Castracoes fachada = Castracoes.getFachada();
     private List<Cliente> listGroup;
-    private HashMap<Cliente, List<Animal>> listData;
+    //private HashMap<Cliente, List<Animal>> listData;
 
     private List<Cliente> listGroupEspera;
-    private HashMap<Cliente, List<Animal>> listDataEspera;
+    //private HashMap<Cliente, List<Animal>> listDataEspera;
 
     private List<Cliente> listGroupNaoPagaram;
-    private HashMap<Cliente, List<Animal>> listDataClientesNaoPagaram;
+    //private HashMap<Cliente, List<Animal>> listDataClientesNaoPagaram;
 
     private List<Cliente> listGroupPagaram;
-    private HashMap<Cliente, List<Animal>> listDataClientesPagaram;
+    //private HashMap<Cliente, List<Animal>> listDataClientesPagaram;
 
     private static int codigoMutirao;
     private Mutirao mutirao;
@@ -60,6 +64,15 @@ public class VisualizarMutirao extends AppCompatActivity {
     private Spinner spinnerSelecaoClientes;
     private ArrayAdapter adapter;
     private int codigoSelecaoCliente;
+
+    private ExpandableAdapter expandableAdapter;
+    private EditText edtTxtPesquisa;
+    private EditText edtTxtPesquisaListaEspera;
+    private TextView txtTitulo;
+    private TextView txtTituloListaEspera;
+    private boolean verificaCliqueBotao;
+    private boolean verificaCliqueBotaoListaEspera;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +128,12 @@ public class VisualizarMutirao extends AppCompatActivity {
         adapter = ArrayAdapter.createFromResource(this, R.array.selecao_clientes, android.R.layout.simple_list_item_1);
         spinnerSelecaoClientes.setAdapter(adapter);
 
+        edtTxtPesquisa = (EditText) findViewById(R.id.edtTxtPesquisa);
+        edtTxtPesquisaListaEspera = (EditText) findViewById(R.id.edtTxtPesquisaListaEspera);
+        txtTitulo = (TextView) findViewById(R.id.textView5);
+        txtTituloListaEspera = (TextView) findViewById(R.id.textView6);
+        verificaCliqueBotao = false;
+        verificaCliqueBotaoListaEspera = false;
     }
 
     public void irTelaCadastrarCliente(View view) {
@@ -126,6 +145,32 @@ public class VisualizarMutirao extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void aparecerCampoPesquisa(View view){
+        if(verificaCliqueBotao == false) {
+            edtTxtPesquisa.setVisibility(View.VISIBLE);
+            txtTitulo.setVisibility(View.INVISIBLE);
+            verificaCliqueBotao = true;
+        }else{
+            edtTxtPesquisa.setVisibility(View.INVISIBLE);
+            edtTxtPesquisa.setText("");
+            txtTitulo.setVisibility(View.VISIBLE);
+            verificaCliqueBotao = false;
+        }
+    }
+
+    public void aparecerCampoPesquisaListaEspera(View view){
+        if(verificaCliqueBotaoListaEspera == false) {
+            edtTxtPesquisaListaEspera.setVisibility(View.VISIBLE);
+            txtTituloListaEspera.setVisibility(View.INVISIBLE);
+            verificaCliqueBotaoListaEspera = true;
+        }else{
+            edtTxtPesquisaListaEspera.setVisibility(View.INVISIBLE);
+            edtTxtPesquisaListaEspera.setText("");
+            txtTituloListaEspera.setVisibility(View.VISIBLE);
+            verificaCliqueBotaoListaEspera = false;
+        }
+    }
+
     public void irTelaCadastrarClienteListaEspera(View view) {
         Intent intent = new Intent(getApplicationContext(), CadastroClienteListaEspera.class);
         Bundle parametros = new Bundle();
@@ -135,21 +180,56 @@ public class VisualizarMutirao extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+    private void expandAll() {
+        int count = expandableAdapter.getGroupCount();
+        Log.d("Aviso", "Quantidade de elementos: " + count);
+
+        for (int i = 0; i < count; i++){
+            expandableListaClientes.expandGroup(i);
+        }
+    }
+     */
+
     public void configurarExpandableListaClientes() {
 
         spinnerSelecaoClientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinnerSelecaoClientes.getSelectedItem().toString().equals("Pagaram")) {
-                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupPagaram, listDataClientesPagaram));
+                    expandableAdapter = new ExpandableAdapter(VisualizarMutirao.this, listGroupPagaram);
+                    expandableListaClientes.setAdapter(expandableAdapter);
                     codigoSelecaoCliente = 1;
                 } else if (spinnerSelecaoClientes.getSelectedItem().toString().equals("Não Pagaram")){
-                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupNaoPagaram, listDataClientesNaoPagaram));
+                    expandableAdapter = new ExpandableAdapter(VisualizarMutirao.this, listGroupNaoPagaram);
+                    expandableListaClientes.setAdapter(expandableAdapter);
                     codigoSelecaoCliente = 2;
                 }else {
-                    expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup, listData));
+                    expandableAdapter = new ExpandableAdapter(VisualizarMutirao.this, listGroup);
+                    //expandableListaClientes.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroup));
+                    expandableListaClientes.setAdapter(expandableAdapter);
                     codigoSelecaoCliente = 0;
+
                 }
+
+                //-----------------------------------------------------------
+                edtTxtPesquisa.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        expandableAdapter.filterData(s.toString());
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
             }
 
             @Override
@@ -185,7 +265,9 @@ public class VisualizarMutirao extends AppCompatActivity {
 
 
     public void configurarExpandableListaEspera() {
-        expandableListaEspera.setAdapter(new ExpandableAdapter(VisualizarMutirao.this, listGroupEspera, listDataEspera));
+        final ExpandableAdapter adapterListaEspera = new ExpandableAdapter(VisualizarMutirao.this, listGroupEspera);
+
+        expandableListaEspera.setAdapter(adapterListaEspera);
 
         expandableListaEspera.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -196,6 +278,22 @@ public class VisualizarMutirao extends AppCompatActivity {
             }
         });
 
+        edtTxtPesquisaListaEspera.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapterListaEspera.filterData(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
     }
@@ -245,9 +343,11 @@ public class VisualizarMutirao extends AppCompatActivity {
     }
 
     public void buildListSelecaoClientes() {
+        /**
         listData = new HashMap<Cliente, List<Animal>>();
         listDataClientesNaoPagaram = new HashMap<Cliente, List<Animal>>();
         listDataClientesPagaram = new HashMap<Cliente, List<Animal>>();
+        */
 
         // GROUP
         listGroup = mutirao.getClientes(); //Pega todos os clientes
@@ -263,6 +363,7 @@ public class VisualizarMutirao extends AppCompatActivity {
         }
 
 
+        /**
         // CHILDREN
         List<Animal> auxList;
         //Insere todos os clientes
@@ -289,24 +390,27 @@ public class VisualizarMutirao extends AppCompatActivity {
             cont++;
         }
 
+         */
+
     }
 
     public void buildListClientesEspera() {
         //listGroupEspera = new ArrayList<Cliente>();
-        listDataEspera = new HashMap<Cliente, List<Animal>>();
+        //listDataEspera = new HashMap<Cliente, List<Animal>>();
 
         // GROUP
         listGroupEspera = mutirao.getListaEspera();
 
         // CHILDREN
         List<Animal> auxList;
+        /**
         int cont = 0;
         for (Cliente cliente : listGroupEspera) {
             auxList = cliente.getAnimais();
             listDataEspera.put(listGroupEspera.get(cont), auxList);
             cont++;
         }
-
+        */
 
 
     }

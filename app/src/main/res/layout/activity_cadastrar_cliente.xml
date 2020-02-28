@@ -21,6 +21,18 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
+        android:id="@+id/edtTxtNomeCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Digite o nome do cliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <EditText
         android:id="@+id/edtTextTipoPagamento"
         android:layout_width="252dp"
         android:layout_height="41dp"
@@ -32,17 +44,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTextTelefone" />
 
-    <EditText
-        android:id="@+id/edtTxtNomeCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite o nome do cliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/edtTextTelefone"
