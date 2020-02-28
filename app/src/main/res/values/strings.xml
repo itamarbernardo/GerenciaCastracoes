@@ -47,5 +47,6 @@
     <string name="title_activity_cadastro_lista_negra">Cadastro - Lista Negra</string>
     <string name="title_activity_visualizar_lista_negra">Visualizar - Lista Negra</string>
     <string name="title_activity_editar_lista_negra">Editar - Lista Negra</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 </resources>
