@@ -25,41 +25,15 @@ import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "ListagemMutiroes";
+    private static final String TAG = "MainActivity";
 
-    private FloatingActionButton btAdicionarMutirao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btAdicionarMutirao = (FloatingActionButton) findViewById(R.id.btAdicionarMutirao);
 
-        btAdicionarMutirao.setOnClickListener(new Button.OnClickListener()
-                                              {
-                                                  public void onClick(View v){
-                                                      AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
-                                                      alerta.setTitle("Aviso");
-                                                      alerta.setCancelable(true); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
-                                                      alerta.setIcon(R.mipmap.ic_interrogacao);
-                                                      alerta.setMessage("Botão clicado!");
-                                                      alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                          @Override
-                                                          public void onClick(DialogInterface dialog, int which) {
-                                                              Toast.makeText(getApplicationContext(), "Ok escolhido", Toast.LENGTH_SHORT).show();
-                                                          }
-                                                      });
-                                                      //Pra colocar outra opção de Cancelar, por ex, só é fazer alerta.setNegativeButton
-
-
-
-                                                      AlertDialog alertDialog = alerta.create();
-                                                      alertDialog.show();
-
-                                                  }
-                                              }
-        );
 
         //Código para permissao do armazenamento interno
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -84,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void irTelaListagemMutiroes(View view){
-        //Intent intent1 = new Intent(getApplicationContext(), CadastroMutiraoActivity.class);
         Intent intent1 = new Intent(getApplicationContext(), ListagemMutiroes.class);
 
         startActivity(intent1);

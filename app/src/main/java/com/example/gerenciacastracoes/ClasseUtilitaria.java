@@ -34,4 +34,9 @@ public class ClasseUtilitaria {
         return data.format(formato); //Deixa no formato conhecido.
     }
 
+    public static int dp2px(Context ctx, float dp) {
+        final float scale = ctx.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
 }
