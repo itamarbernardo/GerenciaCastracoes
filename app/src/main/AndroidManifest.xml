@@ -15,6 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+
+        <!-- FileProvider -->
+        <provider
+            android:name="com.example.gerenciacastracoes.provider.GenericFileProvider"
+            android:authorities="${applicationId}.com.example.gerenciacastracoes.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity
             android:name=".EditarListaNegra"
             android:label="@string/title_activity_editar_lista_negra"
