@@ -136,7 +136,7 @@ public class ListagemMutiroes extends AppCompatActivity {
                         String caminhoPdf = gerarPdf(mutiroes.get(position));
 
                         //sendIntent.putExtra(Intent.EXTRA_TEXT, gerarPdf(mutiroes.get(position)).toString());
-                        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/PDFGerados/"+ caminhoPdf);
+                        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/Gerencia_Castracoes/PDFGerados/"+ caminhoPdf);
 
                         //criar o intent para visualização do documento
                         Uri caminho = FileProvider.getUriForFile(ListagemMutiroes.this, getBaseContext().getApplicationContext().getPackageName() + ".com.example.gerenciacastracoes.provider", file);
@@ -174,12 +174,12 @@ public class ListagemMutiroes extends AppCompatActivity {
     public String gerarPdf(Mutirao mutirao){
         String nomeArquivo =  "Mutirao_" + mutirao.getTipo() + "_" + ClasseUtilitaria.converterDataParaStringFormatoTracinho(mutirao.getData()) + ".pdf";
 
-        File path = new File(Environment.getExternalStorageDirectory(), "/PDFGerados");
+        File path = new File(Environment.getExternalStorageDirectory(), "/Gerencia_Castracoes/PDFGerados");
         if(!path.exists()){
             path.mkdir();
         }
 
-        File pdfFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/PDFGerados/" + nomeArquivo);
+        File pdfFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/Gerencia_Castracoes/PDFGerados/" + nomeArquivo);
 
         Document doc = new Document();
 

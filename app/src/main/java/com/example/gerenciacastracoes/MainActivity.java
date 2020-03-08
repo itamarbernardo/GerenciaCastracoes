@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        apagarPdfsGerados();
 
         //Código para permissao do armazenamento interno
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -67,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent1 = new Intent(getApplicationContext(), ListagemListaNegra.class);
 
         startActivity(intent1);
+    }
+
+    public void apagarPdfsGerados() {
+        File diretorio = new File(Environment.getExternalStorageDirectory(), "/Gerencia_Castracoes/PDFGerados");
+        if (diretorio.isDirectory()) {
+            File[] arquivos = diretorio.listFiles();
+            for (File arquivo : arquivos) {
+                arquivo.delete();
+            }
+        }
     }
 
 }
