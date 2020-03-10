@@ -198,7 +198,7 @@ public class VisualizarClienteListaEspera extends AppCompatActivity {
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
         alerta.setTitle("Transferir...");
         alerta.setCancelable(false); //Se tiver true, permite que a caixa de dialogo suma se clicar fora da caixa de texto.
-        alerta.setIcon(R.mipmap.ic_swap);
+        alerta.setIcon(R.mipmap.ic_swap_menor);
         alerta.setMessage("Tem certeza que deseja transferir este cliente?");
         alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override

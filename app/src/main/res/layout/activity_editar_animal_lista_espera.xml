@@ -6,149 +6,164 @@
     android:layout_height="match_parent"
     tools:context=".EditarAnimalListaEspera">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="28dp"
-        android:text="Editar Animal"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="parent">
 
-    <EditText
-        android:id="@+id/edtTextNomeAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="34dp"
-        android:ems="10"
-        android:hint="Digite o nome do animal"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-    <EditText
-        android:id="@+id/edtTxtRaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:hint="Digite a raça do animal"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTextNomeAnimal" />
-
-    <Spinner
-        android:id="@+id/spinnerTipoAnimal"
-        android:layout_width="191dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="9dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="81dp"
-        android:text="Sexo:"
-        app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="31dp"
-        android:text="Quer roupinha?"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="106dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="17dp"
-        app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/textView31">
-
-        <RadioButton
-            android:id="@+id/radioBtSexoM"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="M" />
+            android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/radioBtSexoF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="F" />
-    </RadioGroup>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="22dp"
-        android:text="Tipo:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="118dp"
+                android:layout_marginTop="28dp"
+                android:text="Editar Animal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <RadioGroup
-        android:layout_width="107dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="13dp"
-        app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/textView32">
+            <EditText
+                android:id="@+id/edtTextNomeAnimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="34dp"
+                android:ems="10"
+                android:hint="Digite o nome do animal"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
-        <RadioButton
-            android:id="@+id/radioBtRoupinhaSim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sim" />
+            <EditText
+                android:id="@+id/edtTxtRaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="22dp"
+                android:ems="10"
+                android:hint="Digite a raça do animal"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextNomeAnimal" />
 
-        <RadioButton
-            android:id="@+id/radioBtRoupinhaNao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Não" />
-    </RadioGroup>
+            <Spinner
+                android:id="@+id/spinnerTipoAnimal"
+                android:layout_width="191dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="9dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
-    <EditText
-        android:id="@+id/edtTxtPelagem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:hint="Digite a pelagem"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="81dp"
+                android:text="Sexo:"
+                app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <Button
-        android:id="@+id/btCadastrarAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="59dp"
-        android:onClick="alterarAnimal"
-        android:text="Alterar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
 
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="31dp"
+                android:text="Quer roupinha?"
+                app:layout_constraintStart_toEndOf="@+id/textView30"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="106dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="17dp"
+                app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/textView31">
+
+                <RadioButton
+                    android:id="@+id/radioBtSexoM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="M" />
+
+                <RadioButton
+                    android:id="@+id/radioBtSexoF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="F" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="22dp"
+                android:text="Tipo:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
+
+            <RadioGroup
+                android:layout_width="107dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="13dp"
+                app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/textView32">
+
+                <RadioButton
+                    android:id="@+id/radioBtRoupinhaSim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sim" />
+
+                <RadioButton
+                    android:id="@+id/radioBtRoupinhaNao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Não" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edtTxtPelagem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="22dp"
+                android:ems="10"
+                android:hint="Digite a pelagem"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
+
+            <Button
+                android:id="@+id/btCadastrarAnimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="59dp"
+                android:onClick="alterarAnimal"
+                android:text="Alterar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

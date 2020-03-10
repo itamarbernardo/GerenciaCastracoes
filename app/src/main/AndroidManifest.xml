@@ -9,9 +9,9 @@
     <application
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_meu_mutirao_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
@@ -30,111 +30,132 @@
         <activity
             android:name=".EditarListaNegra"
             android:label="@string/title_activity_editar_lista_negra"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarListaNegra"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarListaNegra"
             android:label="@string/title_activity_visualizar_lista_negra"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ListagemListaNegra"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastroListaNegra"
             android:label="@string/title_activity_cadastro_lista_negra"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ListagemListaNegra"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ListagemListaNegra"
             android:label="@string/title_activity_listagem_lista_negra"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastrarAnimalListaEspera"
             android:label="@string/title_activity_cadastrar_animal_lista_espera"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarAnimalListaEspera"
             android:label="@string/title_activity_editar_animal_lista_espera"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarAnimalListaEspera"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarAnimalListaEspera"
             android:label="@string/title_activity_visualizar_animal_lista_espera"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarClienteListaEspera"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarAnimal"
             android:label="@string/title_activity_editar_animal"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarAnimal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarAnimal"
             android:label="@string/title_activity_visualizar_animal"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarCliente"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastrarAnimal"
             android:label="@string/title_activity_cadastrar_animal"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarCliente"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarClienteListaEspera"
             android:label="@string/title_activity_editar_cliente_lista_espera"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarClienteListaEspera"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarCliente"
             android:label="@string/title_activity_editar_cliente"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarCliente"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarClienteListaEspera"
             android:label="@string/title_activity_visualizar_cliente_lista_espera"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarMutirao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastroClienteListaEspera"
             android:label="@string/title_activity_cadastro_cliente_lista_espera"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarMutirao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarCliente"
             android:label="@string/title_activity_visualizar_cliente"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarMutirao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditarMutirao"
             android:label="@string/title_activity_editar_mutirao"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarMutirao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastrarCliente"
             android:label="@string/title_activity_cadastrar_cliente"
+            android:screenOrientation="portrait"
             android:parentActivityName=".VisualizarMutirao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VisualizarMutirao"
             android:label="@string/title_activity_visualizar_mutirao"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ListagemMutiroes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ListagemMutiroes"
             android:label="@string/title_activity_listagem_mutiroes"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadastroMutirao"
             android:label="@string/title_activity_cadastro_mutirao"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ListagemMutiroes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/string_vazia"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         </activity>
 
         <activity
             android:name=".SplashScreen"
-            android:label="MeuMutirao"
+            android:screenOrientation="portrait"
             android:theme="@style/AppCompat.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

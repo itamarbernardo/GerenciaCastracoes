@@ -113,6 +113,7 @@
         android:layout_height="43dp"
         android:layout_marginStart="201dp"
         android:layout_marginTop="2dp"
+        android:background="#fafafa"
         android:onClick="irTelaEditarClienteListaEspera"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -124,6 +125,8 @@
         android:layout_height="43dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="7dp"
+        android:background="#fafafa"
+        android:tint="#FF0000"
         android:onClick="removerClienteListaEspera"
         app:layout_constraintStart_toEndOf="@+id/textView27"
         app:layout_constraintTop_toBottomOf="@+id/imgBtTransferirCliente"
@@ -136,9 +139,10 @@
         android:layout_marginStart="201dp"
         android:layout_marginTop="7dp"
         android:onClick="transferirCliente"
+        android:background="#FAFAFA"
         app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/imgBtEditarClienteEspera"
-        app:srcCompat="@drawable/ic_swap_foreground" />
+        app:srcCompat="@drawable/ic_swap_horiz_black_28dp" />
 
     <ImageButton
         android:id="@+id/imgBtIrTelaCadastroAnimal"
@@ -146,7 +150,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="132dp"
-        android:background="#fff"
+        android:background="#FAFAFA"
         android:onClick="irTelaCadastrarAnimalListaEspera"
         android:tint="@color/colorPrimaryDark"
         app:layout_constraintStart_toEndOf="@+id/textView27"

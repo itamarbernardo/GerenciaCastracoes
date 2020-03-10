@@ -6,230 +6,246 @@
     android:layout_height="match_parent"
     tools:context=".CadastroClienteListaEspera">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
-        android:text="Cadastrar Cliente à Lista de espera"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="parent">
 
-    <EditText
-        android:id="@+id/edtTxtNomeCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite o nome do cliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <EditText
-        android:id="@+id/edtTextTipoPagamento"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Digite o Tipo de Pagamento"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTextTelefone" />
-
-
-    <EditText
-        android:id="@+id/edtTextTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint="Digite o telefone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtNomeCliente" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="Pagou?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTextTipoPagamento" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="28dp"
-        android:text="Cadastrar Animal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-    <EditText
-        android:id="@+id/edtTextNomeAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="13dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite o nome do animal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <EditText
-        android:id="@+id/edtTxtRaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="13dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite a raça do animal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTextNomeAnimal" />
-
-    <Spinner
-        android:id="@+id/spinnerTipoAnimal"
-        android:layout_width="191dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="19dp"
-        android:text="Tipo:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="184dp"
-        android:text="Sexo:"
-        app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/edtTextTipoPagamento" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="83dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9">
-
-        <RadioButton
-            android:id="@+id/radioBtPagouSim"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:text="Sim" />
-
-        <RadioButton
-            android:id="@+id/radioBtPagouNao"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:text="Não" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="101dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="400dp"
-        app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <RadioButton
-            android:id="@+id/radioBtSexoM"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="M" />
+            android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/radioBtSexoF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="F" />
-    </RadioGroup>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
-    <EditText
-        android:id="@+id/edtTxtPelagem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="165dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Digite a pelagem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
 
-    <Button
-        android:id="@+id/btCadastrarCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="20dp"
-        android:text="Cadastar"
-        android:onClick="cadastrarCliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="12dp"
+                android:text="Cadastrar Cliente à Lista de espera"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="25dp"
-        android:text="Quer roupinha?"
-        app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+            <EditText
+                android:id="@+id/edtTxtNomeCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="Digite o nome do cliente"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <RadioGroup
-        android:layout_width="88dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/edtTxtPelagem"
-        app:layout_constraintTop_toBottomOf="@+id/textView14">
+            <EditText
+                android:id="@+id/edtTextTipoPagamento"
+                android:layout_width="252dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Digite o Tipo de Pagamento"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextTelefone" />
 
-        <RadioButton
-            android:id="@+id/radioBtRoupinhaSim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sim" />
 
-        <RadioButton
-            android:id="@+id/radioBtRoupinhaNao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Não" />
-    </RadioGroup>
+            <EditText
+                android:id="@+id/edtTextTelefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Digite o telefone"
+                android:inputType="phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtNomeCliente" />
 
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Pagou?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextTipoPagamento" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="118dp"
+                android:layout_marginTop="28dp"
+                android:text="Cadastrar Animal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+            <EditText
+                android:id="@+id/edtTextNomeAnimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:ems="10"
+                android:hint="Digite o nome do animal"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <EditText
+                android:id="@+id/edtTxtRaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:ems="10"
+                android:hint="Digite a raça do animal"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextNomeAnimal" />
+
+            <Spinner
+                android:id="@+id/spinnerTipoAnimal"
+                android:layout_width="191dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="19dp"
+                android:text="Tipo:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtRaca" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="184dp"
+                android:text="Sexo:"
+                app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextTipoPagamento" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="83dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                <RadioButton
+                    android:id="@+id/radioBtPagouSim"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sim" />
+
+                <RadioButton
+                    android:id="@+id/radioBtPagouNao"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:text="Não" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="101dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="59dp"
+                android:layout_marginTop="400dp"
+                app:layout_constraintStart_toEndOf="@+id/edtTextNomeAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <RadioButton
+                    android:id="@+id/radioBtSexoM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="M" />
+
+                <RadioButton
+                    android:id="@+id/radioBtSexoF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="F" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edtTxtPelagem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="165dp"
+                android:ems="10"
+                android:hint="Digite a pelagem"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAnimal" />
+
+            <Button
+                android:id="@+id/btCadastrarCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="146dp"
+                android:layout_marginTop="20dp"
+                android:onClick="cadastrarCliente"
+                android:text="Cadastar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtPelagem" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="25dp"
+                android:text="Quer roupinha?"
+                app:layout_constraintStart_toEndOf="@+id/spinnerTipoAnimal"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+            <RadioGroup
+                android:layout_width="88dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtPelagem"
+                app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+                <RadioButton
+                    android:id="@+id/radioBtRoupinhaSim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sim" />
+
+                <RadioButton
+                    android:id="@+id/radioBtRoupinhaNao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Não" />
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
