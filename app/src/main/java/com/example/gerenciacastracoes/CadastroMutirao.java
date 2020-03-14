@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class CadastroMutirao extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Castracoes fachada = Castracoes.getFachada();
-    private TextView mDisplayDate;
+    private Button mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private int year, month, day;
     private int dia, mes, ano;
@@ -33,7 +34,7 @@ public class CadastroMutirao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_mutirao);
 
-        mDisplayDate = (TextView) findViewById(R.id.textData);
+        mDisplayDate = (Button) findViewById(R.id.textData);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +93,7 @@ public class CadastroMutirao extends AppCompatActivity {
 
     public void cadastrarMutirao(View view) {
         int codigo;
-        if (!tipoMutirao.getSelectedItem().toString().equals("-")) {
+        if (!tipoMutirao.getSelectedItem().toString().equals("Selecione o tipo")) {
             try {
                 Log.d(TAG, "Cadastrar Mutirao: dd/mm/yyyy: " + dia + "/" + mes + "/" + ano);
                 codigo = fachada.adicionarMutirao(LocalDate.of(ano, mes, dia), tipoMutirao.getSelectedItem().toString());

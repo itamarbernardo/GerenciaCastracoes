@@ -51,10 +51,10 @@
             app:layout_constraintHorizontal_bias="0.458"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <Button
             android:id="@+id/textData"
-            android:layout_width="125dp"
-            android:layout_height="29dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="100dp"
@@ -84,7 +84,7 @@
 
         <Spinner
             android:id="@+id/spinnerTipoMutirao"
-            android:layout_width="239dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="69dp"
             android:layout_marginTop="46dp"

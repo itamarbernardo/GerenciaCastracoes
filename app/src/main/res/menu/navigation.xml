@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_lista_negra"
+        android:icon="@drawable/ic_person_add_disabled_24px"
+        android:iconTint="#fff"
+        android:title="Lista Negra"/>
+
+    <item
+        android:id="@+id/navigation_inicio"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Início"/>
+
+    <item
+        android:id="@+id/navigation_lista_mutiroes"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="Mutirões"/>
+
+</menu>

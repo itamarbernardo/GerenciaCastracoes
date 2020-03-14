@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class EditarMutirao extends AppCompatActivity {
     private Castracoes fachada = Castracoes.getFachada();
     private Toolbar toolbar;
 
-    private TextView mDisplayDate;
+    private Button mDisplayDate;
     private Spinner tipoMutirao;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -53,7 +54,7 @@ public class EditarMutirao extends AppCompatActivity {
         if (parametros != null) {
             codigoMutirao = parametros.getInt("codigo_mutirao");
 
-            mDisplayDate = (TextView) findViewById(R.id.textData);
+            mDisplayDate = (Button) findViewById(R.id.textData);
             configurarParametrosData();
 
             tipoMutirao = (Spinner) findViewById(R.id.spinnerTipoMutirao);
@@ -118,7 +119,7 @@ public class EditarMutirao extends AppCompatActivity {
 
     public void alterarMutirao(View view){
 
-        if (!tipoMutirao.getSelectedItem().toString().equals("-")) {
+        if (!tipoMutirao.getSelectedItem().toString().equals("Selecione o tipo")) {
             if(mes != 0){
                 dataMutirao = LocalDate.of(ano, mes, dia);
             }

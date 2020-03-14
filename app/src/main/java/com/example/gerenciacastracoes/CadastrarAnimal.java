@@ -106,7 +106,7 @@ public class CadastrarAnimal extends AppCompatActivity {
 
         if (edtTxtNomeAnimal.getText().length() > 0) {
             if (edtTxtRaca.getText().length() > 0) {
-                if (!spinnerTipoAnimal.getSelectedItem().toString().equals("-")) {
+                if (!spinnerTipoAnimal.getSelectedItem().toString().equals("Selecione o tipo")) {
                     preencherSexoAnimal();
                     if (sexo != 'E') {
                         if (edtTxtPelagem.getText().length() > 0) {

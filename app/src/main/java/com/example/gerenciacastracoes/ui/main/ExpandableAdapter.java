@@ -1,6 +1,7 @@
 package com.example.gerenciacastracoes.ui.main;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +104,19 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         holder.txtGroupTelefone.setText(listGroupPesquisa.get(groupPosition).getTelefone());
         holder.txtGroupQuantidadeRoupinhas.setText(quantRoupinhas + "");
 
+        boolean pagou = listGroupPesquisa.get(groupPosition).isPagou();
+
+        if(!pagou){
+            holder.txtGroupNome.setTextColor(Color.RED);
+            holder.txtGroupTelefone.setTextColor(Color.RED);
+            holder.txtGroupQuantidadeRoupinhas.setTextColor(Color.RED);
+
+        }else{
+            holder.txtGroupNome.setTextColor(Color.GREEN);
+            holder.txtGroupTelefone.setTextColor(Color.GREEN);
+            holder.txtGroupQuantidadeRoupinhas.setTextColor(Color.GREEN);
+
+        }
 
         return convertView;
     }

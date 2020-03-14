@@ -7,14 +7,14 @@
     <string name="title_activity_listagem_mutiroes">Listagem dos Mutirões</string>
 
     <string-array name="tipos_mutirao">
-        <item>-</item>
+        <item>Selecione o tipo</item>
         <item>Gato</item>
         <item>Cachorro</item>
         <item>Misto</item>
     </string-array>
 
     <string-array name="tipos_animais">
-        <item>-</item>
+        <item>Selecione o tipo</item>
         <item>Gato</item>
         <item>Cachorro</item>
     </string-array>
