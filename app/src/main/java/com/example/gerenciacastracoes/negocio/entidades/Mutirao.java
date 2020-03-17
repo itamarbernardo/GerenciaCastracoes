@@ -54,6 +54,28 @@ public class Mutirao implements Serializable, Comparable {
         }
     }
 
+    public int[] calculaQuantAnimaisMachosEFemeas(){
+        int quantidadeM = 0;
+        int quantidadeF = 0;
+        int[] quantidadeSexo = new int[2];
+
+        for(Cliente cliente : clientes){
+            for(Animal animal : cliente.getAnimais()){
+                if(animal.getSexo() == 'M'){
+                    quantidadeM++;
+                }else{
+                    quantidadeF++;
+                }
+            }
+        }
+
+        quantidadeSexo[0] = quantidadeM;
+        quantidadeSexo[1] = quantidadeF;
+
+        return quantidadeSexo;
+    }
+
+
     public void adicionarCliente(Cliente c) throws ClienteNaoPossuiAnimalException, ClienteJaAdicionadoException {
         if (clientes.indexOf(c) == -1) {
             if (c.getAnimais().size() > 0) {

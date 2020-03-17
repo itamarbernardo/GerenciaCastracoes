@@ -55,7 +55,8 @@ public class VisualizarMutirao extends AppCompatActivity {
 
     private TextView dataMutirao;
     private TextView quantidadeAnimais;
-    private TextView quantidadeListaEspera;
+    private TextView quantidadeMachos;
+    private TextView quantidadeFemeas;
     private TextView quantidadeRoupinhas;
     private ImageView imagem;
     private ExpandableListView expandableListaClientes;
@@ -118,7 +119,8 @@ public class VisualizarMutirao extends AppCompatActivity {
 
         dataMutirao = (TextView) findViewById(R.id.txtData);
         quantidadeAnimais = (TextView) findViewById(R.id.txtQuantidadeAnimais);
-        quantidadeListaEspera = (TextView) findViewById(R.id.txtQntListaEspera);
+        quantidadeMachos = (TextView) findViewById(R.id.txtQuantidadeMachos);
+        quantidadeFemeas = (TextView) findViewById(R.id.txtQuantidadeFemeas);
         imagem = (ImageView) findViewById(R.id.imageView);
         quantidadeRoupinhas = (TextView) findViewById(R.id.txtQuantidadeRoupinhas);
         expandableListaClientes = (ExpandableListView) findViewById(R.id.expandableListaClientes);
@@ -180,6 +182,7 @@ public class VisualizarMutirao extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Expande todos automaticamente
     /*
     private void expandAll() {
         int count = expandableAdapter.getGroupCount();
@@ -325,9 +328,12 @@ public class VisualizarMutirao extends AppCompatActivity {
         }
         String data = ClasseUtilitaria.converterDataParaString(mutirao.getData()); //Tenho que formatar a data para mostrar.
 
+        int[] quantidadeAnimaisSexo = mutirao.calculaQuantAnimaisMachosEFemeas();
+
         dataMutirao.setText(data);
         quantidadeAnimais.setText(contAnimais + "");
-        quantidadeListaEspera.setText(contListaEspera + "");
+        quantidadeMachos.setText(quantidadeAnimaisSexo[0] + "");
+        quantidadeFemeas.setText(quantidadeAnimaisSexo[1] + "");
         quantidadeRoupinhas.setText(contRoupinhas + "");
 
         String tipo = mutirao.getTipo();
