@@ -304,6 +304,9 @@ public class VisualizarMutirao extends AppCompatActivity {
     public void preencherDadosCabecalhoMutirao() {
         int contAnimais = 0;
         int contRoupinhas = 0;
+        int quantidadeM = 0;
+        int quantidadeF = 0;
+
 
         List<Cliente> clientes = mutirao.getClientes();
         if (clientes != null && clientes.size() != 0) {
@@ -313,6 +316,12 @@ public class VisualizarMutirao extends AppCompatActivity {
                 for(Animal animal : c.getAnimais()){
                     if(animal.isQuerRoupinha()){
                         contRoupinhas++;
+                    }
+
+                    if(animal.getSexo() == 'M'){
+                        quantidadeM++;
+                    }else {
+                        quantidadeF++;
                     }
                 }
 
@@ -328,12 +337,10 @@ public class VisualizarMutirao extends AppCompatActivity {
         }
         String data = ClasseUtilitaria.converterDataParaString(mutirao.getData()); //Tenho que formatar a data para mostrar.
 
-        int[] quantidadeAnimaisSexo = mutirao.calculaQuantAnimaisMachosEFemeas();
-
         dataMutirao.setText(data);
         quantidadeAnimais.setText(contAnimais + "");
-        quantidadeMachos.setText(quantidadeAnimaisSexo[0] + "");
-        quantidadeFemeas.setText(quantidadeAnimaisSexo[1] + "");
+        quantidadeMachos.setText(quantidadeM + "");
+        quantidadeFemeas.setText(quantidadeF + "");
         quantidadeRoupinhas.setText(contRoupinhas + "");
 
         String tipo = mutirao.getTipo();
